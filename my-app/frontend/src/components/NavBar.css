@@ -1,0 +1,39 @@
+.navBar {
+  /* margin: 4vh; */
+  background-color: #202020;
+  width: auto;
+  height: fit-content;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 40px;
+  padding-left: 40px;
+  /* border-top-left-radius: 1mm;
+  border-top-right-radius: 3ch; */
+  border-bottom-left-radius: 2ch;
+  border-bottom-right-radius: 2ch;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row;
+}
+
+.column {
+  display: flex;
+  align-content: center;
+  flex-flow: column;
+}
+
+.customH1 {
+  font-family: "Arial"; /*Arial, Lucida Sans Unicode, Arial Narrow*/
+  font-weight: 600;
+  font-size: 6mm;
+  letter-spacing: 0.5mm;
+}
+
+.customH2 {
+  width: 100%;
+  font-family: "Segoe UI"; /*Arial, Lucida Sans Unicode, Arial Narrow*/
+  font-weight: 400;
+  font-size: 4mm;
+  letter-spacing: 0.5mm;
+}

@@ -1,0 +1,46 @@
+.row {
+  width: 20%;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  flex-flow: row;
+  align-items: center;
+}
+
+.menuButton {
+  font-family: "Arial"; /*Arial, Lucida Sans Unicode, Arial Narrow*/
+  font-weight: 300;
+  font-size: 5mm;
+  letter-spacing: 0.5mm;
+  background-color: #202020;
+  color: #a3a3a3;
+  box-shadow: none;
+  border: 0;
+  cursor: pointer;
+}
+.menuButton:hover {
+  background-color: #202020;
+  color: white;
+  border-bottom: 5ch;
+  border-color: white;
+  border-bottom-width: 2px;
+  border: 1ch;
+  border-width: 1ch;
+}
+
+.menuButtonClicked {
+  font-family: "Arial"; /*Arial, Lucida Sans Unicode, Arial Narrow*/
+  font-weight: 300;
+  font-size: 5mm;
+  letter-spacing: 0.5mm;
+  background-color: yellow;
+  color: #a3a3a3;
+  box-shadow: none;
+  border: 0;
+  cursor: pointer;
+  outline: none;
+}
+/* .menuButtonClicked:focus {
+  color: white;
+  outline: none;
+} */
