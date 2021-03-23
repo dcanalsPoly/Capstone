@@ -1,8 +1,11 @@
 .App {
-  /* display: flex; */
-  /* text-align: center; */
-  background-color: #161616;
-  color: #161616;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  background-color: white;
+  align-content: center;
+  align-items: center;
+  color: white;
 }
 
 /* .App-header {

@@ -1,12 +1,16 @@
 import './App.css';
-import NavBar from './components/NavBar';
-//
+import Header from './components/Header';
+import Footer from './components/Footer';
+import ReportForm from './components/ReportForm';
+import SummaryTile from './components/SummaryTile';
 
 function App() {
   return (
     <div className="App">
-      <NavBar/>
+      <Header/>
+        <ReportForm/>
       
+      <Footer/>
     </div>
   );
 }

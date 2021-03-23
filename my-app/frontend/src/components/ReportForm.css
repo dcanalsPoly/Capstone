@@ -1,0 +1,13 @@
+.containerReport {
+  border-radius: 5px;
+  background-color: rgb(238, 238, 238);
+}
+
+.textAreaRep {
+  height: 200px;
+}
+
+.structure {
+  display: flex;
+  justify-content: left;
+}
