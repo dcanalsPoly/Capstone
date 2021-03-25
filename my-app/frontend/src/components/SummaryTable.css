@@ -1,0 +1,18 @@
+.summaryTable {
+  padding-right: 5%;
+  width: 55vw;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  align-self: flex-end;
+}
+
+.summaryRow {
+  width: 50vw;
+  height: fit-content;
+  display: flex;
+  justify-content: space-around;
+  flex-flow: row nowrap;
+  align-items: center;
+  margin-bottom: 10px;
+}

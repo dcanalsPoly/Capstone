@@ -1,6 +1,7 @@
 import './SummaryTile.css';
 import { IoIosArrowDown } from 'react-icons/io';
 import { IoIosArrowUp } from 'react-icons/io';
+import './styling/customLabel.css';
 //npm install react-icons --save
 
 function SummaryTile(props) {
@@ -17,14 +18,20 @@ function SummaryTile(props) {
         else 
             return number;
     }
-    
+
+    var iconStyle;
+    if (props.showIcon === 'true')
+        iconStyle = "icon";
+    else 
+        iconStyle = "invisibleIcon";
+
     return <div>
         <div className="tileRow">
-            <IoIosArrowDown className="icon"></IoIosArrowDown>
+            <IoIosArrowDown className={iconStyle}></IoIosArrowDown>
             <div className="container">
-                <span className="text">{roundUp(props.number)}</span>
+                <span className="customH3">{roundUp(props.number)}</span>
             </div>
-            <span className="text">{props.type}</span>
+            <span className="customH3">{props.type}</span>
         </div>
     </div>
 }

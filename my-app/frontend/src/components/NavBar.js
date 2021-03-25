@@ -1,4 +1,5 @@
 import './NavBar.css';
+import './styling/customLabel.css';
 import Menu from './Menu.js';
 
 function NavBar() {

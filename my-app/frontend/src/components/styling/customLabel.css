@@ -1,0 +1,23 @@
+.customH1 {
+  font-family: "Arial"; /*Arial, Lucida Sans Unicode, Arial Narrow*/
+  font-weight: 600;
+  font-size: 6mm;
+  letter-spacing: 0.5mm;
+}
+
+.customH2 {
+  width: 100%;
+  font-family: "Arial"; /*Arial, Lucida Sans Unicode, Arial Narrow*/
+  font-weight: 400;
+  font-size: 4mm;
+  letter-spacing: 0.5mm;
+}
+
+.customH3 {
+  width: 100%;
+  font-family: "Segoe UI"; /*Arial, Lucida Sans Unicode, Arial Narrow*/
+  font-weight: 500;
+  font-size: 5mm;
+  letter-spacing: 0.5mm;
+  color: white;
+}

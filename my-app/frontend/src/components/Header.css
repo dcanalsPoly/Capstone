@@ -2,3 +2,33 @@
   width: 100%;
   background-color: #7eca9c;
 }
+
+.headerRow {
+  height: fit-content;
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.headerContainer {
+  background-color: #71b38b; /*give brighter color of background of the division*/
+  padding: 70px 0px 70px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  width: 30%;
+  border-radius: 0px 150px 20px 0px;
+}
+
+.headerText {
+  width: fit-content;
+  font-size: 15mm;
+  font-weight: 500;
+  color: white; /*black or white?*/
+  font-family: "Segoe UI"; /*Arial, Lucida Sans Unicode, Arial Narrow*/
+}

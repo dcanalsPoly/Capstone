@@ -8,24 +8,23 @@
 }
 
 .icon {
-  font-size: 3ch;
-  color: #161616; /*give background of the division to make it look hollow*/
+  font-size: 25mm;
+  color: #7eca9c;
   stroke: white;
-  stroke-width: 30px;
+  stroke-width: 25px;
+}
+
+.invisibleIcon {
+  opacity: 0;
+  font-size: 25mm;
+  color: #7eca9c;
+  stroke: white;
+  stroke-width: 25px;
 }
 
 .container {
-  background-color: rgb(
-    107,
-    107,
-    18
-  ); /*give brighter color of background of the division*/
-  padding: 0px 10px 2px 10px;
+  background-color: #71b38b; /*give brighter color of background of the division*/
+  padding: 2px 15px 4px 15px;
   border-radius: 2ch;
-  margin: 0px 8px 0px 5px;
-}
-
-.text {
-  color: white; /*black or white?*/
-  font-family: "Segoe UI"; /*Arial, Lucida Sans Unicode, Arial Narrow*/
+  margin-right: 5px;
 }
