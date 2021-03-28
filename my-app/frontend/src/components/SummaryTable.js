@@ -2,7 +2,7 @@ import SummaryTile from './SummaryTile';
 import './SummaryTable.css';
 import './styling/customLabel.css';
 
-//create a map (like in Flutter) for the data (use dummy data) to be used in the tiles 
+//create a map (object) for the data (use dummy data) to be used in the tiles 
 
 function SummaryTable(props) {
     return <div className="summaryTable">

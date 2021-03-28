@@ -1,0 +1,10 @@
+.graph {
+  width: 50%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  flex-flow: column nowrap;
+  padding: 5%;
+  border-radius: 30px;
+  border: 8px solid #71b38b;
+}
