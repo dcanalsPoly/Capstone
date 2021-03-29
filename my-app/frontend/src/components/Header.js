@@ -8,9 +8,9 @@ function Header () {
         <NavBar/>
         <div className="headerRow">
             <div className="headerContainer">
-                <span className="headerText">{"simple data"}</span>
-                <span className="headerText">{"visualization"}</span>
-                <span className="headerText">{"& analysis"}</span>
+                <span className="headerText">simple data</span>
+                <span className="headerText">visualization</span>
+                <span className="headerText">& analysis</span>
             </div>
             <SummaryTable/>
         </div>
