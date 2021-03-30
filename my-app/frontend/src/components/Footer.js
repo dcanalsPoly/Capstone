@@ -13,7 +13,7 @@ function Footer () {
                 Report an Error
            </span> 
            <span className={"customH2", "padding"}>
-                <ReportForm/>
+               <ReportForm/>
            </span>
         </div>
         <div className="footerContainer">
