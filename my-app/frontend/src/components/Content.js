@@ -3,7 +3,7 @@ import Graph from './Graph';
 
 function Content() {
     return <div className="content">
-        <Graph/>
+        <Graph graph = "line" />
     </div>
 }
 export default Content;

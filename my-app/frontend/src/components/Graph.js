@@ -1,7 +1,7 @@
 import {Bar, Line, Pie} from 'react-chartjs-2';
 import './Graph.css';
 
-function Graph () {
+function Graph (props) {
     var data = {
             labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
             datasets: [{
@@ -61,11 +61,32 @@ function Graph () {
             }
         };
 
-    return <div className="graph" id="graphs">
+    if (props.graph === "line") {
+        return <div className="graph" id="graphs">
         <Line 
             data={data} 
             options={options}>
         </Line>
-    </div>
+        </div>
+    
+    } else if (props.graph === "bar"){
+        return <div className="graph" id="graphs">
+        <Bar 
+            data={data} 
+            options={options}>
+        </Bar>
+        </div>
+
+    }
+      else if (props.graph === "pie"){
+        return <div className="graph" id="graphs">
+        <Pie 
+            data={data} 
+            options={options}>
+        </Pie>
+        </div>
+
+      }
+    
 }
 export default Graph;
