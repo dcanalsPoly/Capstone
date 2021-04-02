@@ -4,15 +4,31 @@
   padding: 0px 0px 50px 0px;
 }
 
-.footerContainer {
+.reportContainer {
+  /*this is the same as the referencesContactContainer*/
   padding: 5% 5% 0% 5%;
+  display: flex;
+  flex-flow: column;
+}
+
+.referencesContactRow {
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+}
+
+.referencesContactContainer {
+  /*this is the same as the reportContainer*/
+  padding: 5% 5% 0% 5%;
+  width: fit-content;
   display: flex;
   flex-flow: column;
 }
 
 .padding {
   padding-top: 1%;
-  padding-left: 1%;
+  padding-left: 2%;
 }
 
 .textPadding {
