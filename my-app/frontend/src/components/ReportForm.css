@@ -1,13 +1,61 @@
 .containerReport {
-  border-radius: 5px;
-  background-color: rgb(238, 238, 238);
+  width: 100%;
+  border-radius: 7px;
+  background-color: #71B38B;
 }
 
-.textAreaRep {
-  height: 200px;
+.textAreaRep{
+  size: 120;
+  height: 100px;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+}
+
+.textTags {
+  color: #FFFFFF;
 }
 
 .structure {
-  display: flex;
-  justify-content: left;
+  padding-right: .5%;
+  padding-left: .25%;
 }
+
+.newError {
+  display: flex;
+  align-content: center;
+  width: max-content;
+  border-radius: 2px;
+  background: none;
+  color: white;
+  box-shadow: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.newError:hover {
+  color: #6890ff;
+}
+
+.submitButton {
+  display: flex;
+  align-content: center;
+  width: max-content;
+  border-radius: 2px;
+  font-family: "Arial";
+  font-weight: 300;
+  font-size: 4mm;
+  letter-spacing: 0.5mm;
+  background-color: honeydew;
+  color: black;
+  box-shadow: none;
+  border: 0;
+  cursor: pointer;
+}
+.submitButton:hover{
+  background-color:#bfd0fd;
+}
+
+
+/*<input className= 'submitButton' value='Submit'></input>>
+<span className={clickedSubmit} tabIndex='1' onClick={() => setClicked("Submit")}>Submit</span>*/
