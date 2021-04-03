@@ -1,5 +1,6 @@
 import './Menu.css';
 import React, { useState } from 'react';
+import {Link} from 'react-scroll';
 
 function Menu() {
     
@@ -14,9 +15,15 @@ function Menu() {
     else if (clicked === "Contact us") {clickedContact = 'menuButtonClicked';}
 
   return <div className="menuRow">
-      <span  className={clickedGraphs} tabIndex='1' onClick={() => setClicked("Graphs")}>Graphs</span>
-      <span className={clickedAbout} tabIndex='2' onClick={() => setClicked("About us")}>About us</span>
-      <span className={clickedContact} tabIndex='3' onClick={() => setClicked("Contact us")}>Contact us</span>
+      <span  className={clickedGraphs} onClick={() => setClicked("Graphs")}>
+        <Link to="graphs" offset={-95} spy={true} smooth={true}>Graphs</Link>
+      </span>
+      <span className={clickedAbout} onClick={() => setClicked("About us")}>About us</span>
+      <span className={clickedContact} onClick={() => setClicked("Contact us")}>Contact us</span>
   </div>
 }
 export default Menu;
+
+/*
+
+*/ 

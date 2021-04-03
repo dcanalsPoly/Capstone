@@ -61,7 +61,7 @@ function Graph () {
             }
         };
 
-    return <div className="graph">
+    return <div className="graph" id="graphs">
         <Line 
             data={data} 
             options={options}>
