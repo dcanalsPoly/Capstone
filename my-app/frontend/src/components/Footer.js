@@ -19,7 +19,7 @@ function Footer () {
         </div>
 
         <div className="referencesContactRow">
-               <div className="referencesContactContainer">
+               <div className="referencesContactContainer" id="references">
                     <span className="customH1">
                          References
                     </span> 
@@ -28,7 +28,7 @@ function Footer () {
                     </span>
                </div>
            
-               <div className="referencesContactContainer">
+               <div className="referencesContactContainer" id="contact">
                     <span className="customH1">
                          Contact us
                     </span> 

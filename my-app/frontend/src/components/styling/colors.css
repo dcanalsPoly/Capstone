@@ -1,0 +1,9 @@
+:root {
+  --main-color: #3e6bfd;
+}
+
+.main {
+  width: 400px;
+  border: 2px solid var(--main-color);
+  padding: 3px;
+}

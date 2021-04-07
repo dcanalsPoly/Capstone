@@ -19,17 +19,16 @@ function ReportForm  (props){
     if (clicked === "Submit") 
     {
         return (
-        <div>
+        <div id="report">
             <label>Report submitted!</label>
             <span className={clickedSubmit} tabIndex='1' onClick={() => setClicked("Report")}>Report a new error</span>
         </div>
         )
     }
-
     else if (clicked === "Report" || clicked === false) 
     {
         return(
-            <div className="containerReport">
+            <div className="containerReport" id="report">
 
                 <label className= 'textTags'>Type of error:</label>
                 <select className= "structure" placeholder="Choose an error" onChange={(e) => setErrorType(e.target.value)}>
