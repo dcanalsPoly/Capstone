@@ -1,6 +1,7 @@
 import './Content.css';
 import Graph from './Graph';
 import ColorblindButton from './ColorblindButton';
+import GraphSelector from './GraphSelector';
 import React, { useState } from 'react';
 
 function Content() {
@@ -13,10 +14,17 @@ function Content() {
     const [normalColor, setNormalColor] = useState('#e40017'); 
     const [darkColor, setDarkColor] = useState('#91091e'); 
     const [lineColor, setLineColor] = useState('#28527a');
+    const [graphKind, setGraphKind] = useState('line');
+    const [graphXAxis, setGraphXAxis] = useState(["7", "8", "9", "10", "11", "12", "13"]);
+    const [graphYAxis, setGraphYAxis] = useState([12, 19, 3, 5, 2, 3]);
+    const [graphLabel, setGraphLabel] = useState("#s of Cases");
+
+
 
     return <div className="content">
         <ColorblindButton setLightColor={setLightColor} setNormalColor={setNormalColor} setDarkColor={setDarkColor} setLineColor={setLineColor}/>
-        <Graph graph="pie" lightColor={lightColor} normalColor={normalColor} darkColor={darkColor} lineColor={lineColor}/>
+        <GraphSelector setGraphKind={setGraphKind} setXAxis={setGraphXAxis} setYAxis={setGraphYAxis} setLabel={setGraphLabel}/>
+        <Graph graph={graphKind} xAxis={graphXAxis} yAxis={graphYAxis} Label={graphLabel} lightColor={lightColor} normalColor={normalColor} darkColor={darkColor} lineColor={lineColor}/>
     </div>
 }
 export default Content;

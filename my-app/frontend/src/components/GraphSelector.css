@@ -1,0 +1,15 @@
+.label {
+    padding-top: 2px;
+    margin-right: 5px;
+  }
+
+  .dropButton {
+    letter-spacing: 0.3mm;
+    height: fit-content;
+    width: fit-content;
+    color: black;
+    border-radius: 5px;
+    border: 1.5px solid black;
+    font-size: 15px;
+    cursor: pointer;
+  }
