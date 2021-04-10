@@ -2,7 +2,7 @@ import {Bar, Line, Pie} from 'react-chartjs-2';
 import './Graph.css';
 
 function Graph (props) {
-
+    console.log(props.graph);
     
     var data = {
             labels: props.xAxis,
