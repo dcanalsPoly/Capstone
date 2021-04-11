@@ -2,11 +2,13 @@ import {Bar, Line, Pie} from 'react-chartjs-2';
 import './Graph.css';
 
 function Graph (props) {
+    console.log(props.graph);
+    
     var data = {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            labels: props.xAxis,
             datasets: [{
-                label: '# of Cases',
-                data: [12, 19, 3, 5, 2, 3],
+                label: props.Label,
+                data: props.yAxis,
                 fill: props.graph === "line" ? false : true,
                 backgroundColor: [
                     props.lightColor,
@@ -16,12 +18,10 @@ function Graph (props) {
                     props.normalColor,
                     props.darkColor,
                 ],
-                borderColor: props.graph === "bar" ? [] : [
-                    props.lineColor,
-                ],
+                borderColor: props.graph === "line" ? [props.lineColor] : [],
                 borderWidth: 2,
 
-            }, {
+            }, /*{
                 label: '# of Deaths',
                 data: [3, 15, 20, 7, 8, 1],
                 fill: props.graph === "line" ? false : true,
@@ -38,7 +38,7 @@ function Graph (props) {
                 ],
                 borderWidth: 2,
 
-            },]
+            },*/]
         };
 
     var options = {
@@ -52,6 +52,7 @@ function Graph (props) {
                 }]
             }
         };
+
 
     if (props.graph === "line") {
         return <div className="graph" id="graphs">
