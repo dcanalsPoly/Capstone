@@ -4,18 +4,11 @@ import './styling/customLabel.css';
 import { IoColorPaletteSharp } from 'react-icons/io5';
 
 function ColorblindButton(props) {
-    
-/* <button onClick={() => Colors.setTheme("Graphs")}></button> */
 
     const [colorblindType, setColorblindType] = useState("Default");
     console.log(colorblindType);
 
-    const [showDropdown, setShowDropdown] = useState("false");
-
-    //do fucntion that when you tap the dropdown item, sets value of colorblindType, 
-    //and triggers the showDropdown to the contrary
     function onClickDropItem (type) {
-        showDropdown === "false" ? setShowDropdown("true") : setShowDropdown("false");
         if (type === "Default")
         {
             props.setLightColor('#007965');
@@ -43,33 +36,13 @@ function ColorblindButton(props) {
 
     }
 
-    if (showDropdown === "false")
-        return <div className="dropdownButton">
-            <span onClick={() => showDropdown === "false" ? setShowDropdown("true") : setShowDropdown("false")}>
-                <IoColorPaletteSharp className="dropIcon"></IoColorPaletteSharp>
-            </span>
+        return <div className="colorDiv">
+            <IoColorPaletteSharp className="colorIcon"></IoColorPaletteSharp>
+                <select className="tester" onChange={(e) => {onClickDropItem(e.target.value);}}>
+                    <option value="Default" className="dropdownItems customH3">Default</option>
+                    <option value="Deuteranopia" className="dropdownItems customH3">Deuteranopia</option>
+                    <option value="Tritanopia" className="dropdownItems customH3">Tritanopia</option>
+                </select>
         </div>
-    else {
-        return <div className="dropdownColumn">
-            <div className="dropdownButton">
-                <span onClick={() => showDropdown === "false" ? setShowDropdown("true") : setShowDropdown("false")}>
-                    <IoColorPaletteSharp className="dropIcon"></IoColorPaletteSharp>
-                </span>
-            </div>
-            
-            <div className="dropdownItemsContainer">
-                <span className="dropdownItems customH3" onClick={() => onClickDropItem("Default")}>
-                Default
-                </span>
-                <span className="dropdownItems customH3" onClick={() => onClickDropItem("Deuteranopia")}>
-                Deuteranopia
-                </span>
-                <span className="dropdownItems customH3" onClick={() => onClickDropItem("Tritanopia")}>
-                Tritanopia
-                </span>
-            </div>
-            
-        </div>
-    }
 }
 export default ColorblindButton;

@@ -3,21 +3,14 @@ import './Graph.css';
 
 function Graph (props) {
     console.log(props.graph);
-    
+
     var data = {
             labels: props.xAxis,
             datasets: [{
                 label: props.Label,
                 data: props.yAxis,
                 fill: props.graph === "line" ? false : true,
-                backgroundColor: [
-                    props.lightColor,
-                    props.normalColor,
-                    props.darkColor,
-                    props.lightColor,
-                    props.normalColor,
-                    props.darkColor,
-                ],
+                backgroundColor: props.colors,
                 borderColor: props.graph === "line" ? [props.lineColor] : [],
                 borderWidth: 2,
 

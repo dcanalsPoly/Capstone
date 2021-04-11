@@ -65,13 +65,45 @@ function Content() {
     const [darkColor, setDarkColor] = useState('#2d6187'); 
     const [lineColor, setLineColor] = useState('#75daad');
 
+    function pieColorAmount () {
+        var colors = [];
+        var count = 0;
+        for (var i = 0; i < graphYAxis.length; i++)
+        {
+            if (count == 0) {
+                colors[i] = lightColor;
+                count++;
+            }
+            else if (count == 1) {
+                colors[i] = normalColor;
+                count++;
+            }
+            else if (count == 2) {
+                colors[i] = darkColor;
+                count = 0;
+            }
+        }
+        //
+        return colors;
+    }
+
+    function lineAndBarColorAmount () {
+        var colors = [];
+        for (var i = 0; i < graphYAxis.length; i++)
+        {
+            colors[i] = normalColor;
+        }
+        //
+        return colors;
+    } 
+
     return <div className="content">
         <div className="contentRow">
-            <span></span>
+            <span className="span"></span>
             <GraphSelector graphType={graphTypeState} setGraphType={setGraphTypeState}/>
             <ColorblindButton setLightColor={setLightColor} setNormalColor={setNormalColor} setDarkColor={setDarkColor} setLineColor={setLineColor}/>
         </div>
-        <Graph graph={graphKind} xAxis={graphXAxis} yAxis={graphYAxis} Label={graphLabel} lightColor={lightColor} normalColor={normalColor} darkColor={darkColor} lineColor={lineColor}/>
+        <Graph graph={graphKind} xAxis={graphXAxis} yAxis={graphYAxis} Label={graphLabel} colors={graphKind === "pie" ? pieColorAmount() : lineAndBarColorAmount} lineColor={lineColor}/>
     </div>
 }
 export default Content;
