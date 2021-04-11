@@ -7,31 +7,57 @@
   justify-self: center;
 }
 
-.label {
-  padding-top: 2px;
-  margin-right: 5px;
+.dropdownColumn {
+  /* position: absolute; */
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 /* Dropdown Button */
-.dropButton {
-  letter-spacing: 0.3mm;
-  height: fit-content;
+.dropdownButton {
+  padding: 3px 3px 0px 3px;
   width: fit-content;
-  color: black;
   border-radius: 5px;
-  border: 1.5px solid black;
-  font-size: 15px;
+  border: 3px solid #7eca9c;
   cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
 
-/* Dropdown button on hover & focus */
-.dropbtn:hover,
-.dropbtn:focus {
-  background-color: #e3f4ff;
+.dropIcon {
+  font-size: 6mm;
+  color: #7eca9c;
+  stroke: #7eca9c;
+  stroke-width: 15px;
 }
 
 /* The container <div> - needed to position the dropdown content */
+.dropdownItemsContainer {
+  position: relative;
+  top: -3px;
+  padding: 3px 5px 3px 5px;
+  width: fit-content;
+  border-radius: 5px;
+  border: 3px solid #7eca9c;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .dropdownItems {
+  width: inherit;
+  font-size: 4mm;
+  letter-spacing: 0.2mm;
   position: relative;
   display: inline-block;
+  cursor: pointer;
+  color: #7eca9c;
+}
+
+.dropdownItems:hover {
+  color: #62a17c;
 }
