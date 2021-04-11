@@ -5,8 +5,9 @@ import { IoColorPaletteSharp } from 'react-icons/io5';
 
 function ColorblindButton(props) {
 
-    const [colorblindType, setColorblindType] = useState("Default");
-    console.log(colorblindType);
+    //green&blue default =  #007965, #018383, #2d6187,, #75daad
+    //blue&yellow deuteronopia = #f9f871, #fddb3a, #fff600,, #28527a
+    //red&blue tritanopia = #e84545, #e40017, #91091e,, #28527a
 
     function onClickDropItem (type) {
         if (type === "Default")

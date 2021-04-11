@@ -1,0 +1,44 @@
+.tabContainer {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row;
+  padding: 20px 1% 15px 1%;
+  width: 25%;
+  border-radius: 8px;
+  border: 3px solid #7eca9c;
+}
+
+.tabColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.lineIndicator {
+  margin-top: 5px;
+  border: solid #7eca9c 4px;
+  border-radius: 10px;
+  border-bottom: none;
+  width: 50%;
+}
+
+.invisibleIndicator {
+  margin-top: 5px;
+  border: solid #7eca9c 4px;
+  border-radius: 10px;
+  border-bottom: none;
+  width: 50%;
+  opacity: 0%;
+}
+
+.tabText {
+  color: #7eca9c;
+  font-family: "Segoe UI"; /*Arial, Lucida Sans Unicode, Arial Narrow*/
+  font-weight: 500;
+  font-size: 6mm;
+  letter-spacing: 0.5mm;
+  cursor: pointer;
+}
