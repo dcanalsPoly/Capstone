@@ -220,17 +220,55 @@ function Content() {
     //
     //Graph Tab
     //
-    const [tabType, setTabType] = useState("Cases");
+    //const [tabType, setTabType] = useState("Cases");
 
 
     return <div className="content">
-        <GraphTab setTabType={setTabType}/>
-        <div className="contentRow">
-            <span className="span"></span>
-            <GraphSelector tabType={tabType} graphType={graphTypeState} setGraphType={setGraphTypeState}/>
-            <ColorblindButton setLightColor={setLightColor} setNormalColor={setNormalColor} setDarkColor={setDarkColor} setLineColor={setLineColor}/>
+        {/* <GraphTab setTabType={setTabType}/> */}
+        
+        <div className="graphRow padding">
+            {/*Cases*/}
+            <div className="graphColumn">
+                <div className="graphOptions">
+                    <span className="span"></span>
+                    <GraphSelector tabType={"Cases"} graphType={graphTypeState} setGraphType={setGraphTypeState}/>
+                    <ColorblindButton setLightColor={setLightColor} setNormalColor={setNormalColor} setDarkColor={setDarkColor} setLineColor={setLineColor}/>
+                </div>
+                <Graph graph={graphKind} xAxis={graphXAxis} yAxis={graphYAxis} Label={graphLabel} colors={graphKind === "pie" ? pieColorAmount() : lineAndBarColorAmount} lineColor={lineColor}/>
+            </div>
+            
+            {/*Deaths*/}
+            <div className="graphColumn">
+                <div className="graphOptions">
+                    <span className="span"></span>
+                    <GraphSelector tabType={"Deaths"} graphType={graphTypeState} setGraphType={setGraphTypeState}/>
+                    <ColorblindButton setLightColor={setLightColor} setNormalColor={setNormalColor} setDarkColor={setDarkColor} setLineColor={setLineColor}/>
+                </div>
+                <Graph graph={graphKind} xAxis={graphXAxis} yAxis={graphYAxis} Label={graphLabel} colors={graphKind === "pie" ? pieColorAmount() : lineAndBarColorAmount} lineColor={lineColor}/>
+            </div>
         </div>
-        <Graph graph={graphKind} xAxis={graphXAxis} yAxis={graphYAxis} Label={graphLabel} colors={graphKind === "pie" ? pieColorAmount() : lineAndBarColorAmount} lineColor={lineColor}/>
+        
+        <div className="graphRow padding">
+            {/*Vaccinations*/}
+            <div className="graphColumn">
+                <div className="graphOptions">
+                    <span className="span"></span>
+                    <GraphSelector tabType={"Vaccinations"} graphType={graphTypeState} setGraphType={setGraphTypeState}/>
+                    <ColorblindButton setLightColor={setLightColor} setNormalColor={setNormalColor} setDarkColor={setDarkColor} setLineColor={setLineColor}/>
+                </div>
+                <Graph graph={graphKind} xAxis={graphXAxis} yAxis={graphYAxis} Label={graphLabel} colors={graphKind === "pie" ? pieColorAmount() : lineAndBarColorAmount} lineColor={lineColor}/>
+            </div>
+
+            {/*Mix*/}
+            <div className="graphColumn">
+                <div className="graphOptions">
+                    <span className="span"></span>
+                    <GraphSelector tabType={"Mix"} graphType={graphTypeState} setGraphType={setGraphTypeState}/>
+                    <ColorblindButton setLightColor={setLightColor} setNormalColor={setNormalColor} setDarkColor={setDarkColor} setLineColor={setLineColor}/>
+                </div>
+                <Graph graph={graphKind} xAxis={graphXAxis} yAxis={graphYAxis} Label={graphLabel} colors={graphKind === "pie" ? pieColorAmount() : lineAndBarColorAmount} lineColor={lineColor}/>
+            </div>
+        </div>
     </div>
 }
 export default Content;
