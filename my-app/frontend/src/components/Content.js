@@ -9,12 +9,30 @@ function Content() {
     //
     //Graph dropdown
     //
-    const [graphTypeState, setGraphTypeState] = useState("casesByDay");
+    const [casesGraphType, setCasesGraphType] = useState("casesByDay");
+    const [deathsGraphType, setDeathsGraphType] = useState("deathsByDay");
+    const [vaccinationisGraphType, setVaccinationsGraphType] = useState("vaccinationsByDay");
+    const [mixGraphType, setMixGraphType] = useState("mixByDay");
 
-    var graphKind;
-    var graphXAxis = [];
-    var graphYAxis = [];
-    var graphLabel = [];
+    var casesGraphKind;
+    var casesGraphXAxis = [];
+    var casesGraphYAxis = [];
+    var casesGraphLabel = [];
+    //
+    var deathsGraphKind;
+    var deathsGraphXAxis = [];
+    var deathsGraphYAxis = [];
+    var deathsGraphLabel = [];
+    //
+    var vaccinationsGraphKind;
+    var vaccinationsGraphXAxis = [];
+    var vaccinationsGraphYAxis = [];
+    var vaccinationsGraphLabel = [];
+    //
+    var mixGraphKind;
+    var mixGraphXAxis = [];
+    var mixGraphYAxis = [];
+    var mixGraphLabel = [];
 
     var objetoTest = {
         cases:{
@@ -89,103 +107,118 @@ function Content() {
     };
 
 
-    if (graphTypeState == "casesByDay")
+    if (casesGraphType == "casesByDay")
     {
-        graphKind = "line";
-        graphXAxis = objetoTest.cases.byDay.xAxis;
-        graphYAxis = objetoTest.cases.byDay.yAxis;
-        graphLabel = objetoTest.cases.byDay.label;
+        casesGraphKind = "line";
+        casesGraphXAxis = objetoTest.cases.byDay.xAxis;
+        casesGraphYAxis = objetoTest.cases.byDay.yAxis;
+        casesGraphLabel = objetoTest.cases.byDay.label;
     }
-    else if (graphTypeState == "casesByMonth")
+    else if (casesGraphType == "casesByMonth")
     {
-        graphKind = "bar";
-        graphXAxis = objetoTest.cases.byMonth.xAxis;
-        graphYAxis = objetoTest.cases.byMonth.yAxis;
-        graphLabel = objetoTest.cases.byMonth.label;
+        casesGraphKind = "bar";
+        casesGraphXAxis = objetoTest.cases.byMonth.xAxis;
+        casesGraphYAxis = objetoTest.cases.byMonth.yAxis;
+        casesGraphLabel = objetoTest.cases.byMonth.label;
     }
-    else if (graphTypeState == "casesByRegion")
+    else if (casesGraphType == "casesByRegion")
     {
-        graphKind = "pie";
-        graphXAxis = objetoTest.cases.byRegion.xAxis;
-        graphYAxis = objetoTest.cases.byRegion.yAxis;
-        graphLabel = objetoTest.cases.byRegion.label;
-    }
-    //
-    else if (graphTypeState == "deathsByDay")
-    {
-        graphKind = "line";
-        graphXAxis = objetoTest.deaths.byDay.xAxis;
-        graphYAxis = objetoTest.deaths.byDay.yAxis;
-        graphLabel = objetoTest.deaths.byDay.label;
-    }
-    else if (graphTypeState == "deathsByMonth")
-    {
-        graphKind = "bar";
-        graphXAxis = objetoTest.deaths.byMonth.xAxis;
-        graphYAxis = objetoTest.deaths.byMonth.yAxis;
-        graphLabel = objetoTest.deaths.byMonth.label;
-    }
-    else if (graphTypeState == "deathsByRegion")
-    {
-        graphKind = "pie";
-        graphXAxis = objetoTest.deaths.byRegion.xAxis;
-        graphYAxis = objetoTest.deaths.byRegion.yAxis;
-        graphLabel = objetoTest.deaths.byRegion.label;
+        casesGraphKind = "pie";
+        casesGraphXAxis = objetoTest.cases.byRegion.xAxis;
+        casesGraphYAxis = objetoTest.cases.byRegion.yAxis;
+        casesGraphLabel = objetoTest.cases.byRegion.label;
     }
     //
-    else if (graphTypeState == "vaccinationsByDay")
+    if (deathsGraphType == "deathsByDay")
     {
-        graphKind = "line";
-        graphXAxis = objetoTest.vaccinations.byDay.xAxis;
-        graphYAxis = objetoTest.vaccinations.byDay.yAxis;
-        graphLabel = objetoTest.vaccinations.byDay.label;
+        deathsGraphKind = "line";
+        deathsGraphXAxis = objetoTest.deaths.byDay.xAxis;
+        deathsGraphYAxis = objetoTest.deaths.byDay.yAxis;
+        deathsGraphLabel = objetoTest.deaths.byDay.label;
     }
-    else if (graphTypeState == "vaccinationsByMonth")
+    else if (deathsGraphType == "deathsByMonth")
     {
-        graphKind = "bar";
-        graphXAxis = objetoTest.vaccinations.byMonth.xAxis;
-        graphYAxis = objetoTest.vaccinations.byMonth.yAxis;
-        graphLabel = objetoTest.vaccinations.byMonth.label;
+        deathsGraphKind = "bar";
+        deathsGraphXAxis = objetoTest.deaths.byMonth.xAxis;
+        deathsGraphYAxis = objetoTest.deaths.byMonth.yAxis;
+        deathsGraphLabel = objetoTest.deaths.byMonth.label;
     }
-    else if (graphTypeState == "vaccinationsByRegion")
+    else if (deathsGraphType == "deathsByRegion")
     {
-        graphKind = "pie";
-        graphXAxis = objetoTest.vaccinations.byRegion.xAxis;
-        graphYAxis = objetoTest.vaccinations.byRegion.yAxis;
-        graphLabel = objetoTest.vaccinations.byRegion.label;
+        deathsGraphKind = "pie";
+        deathsGraphXAxis = objetoTest.deaths.byRegion.xAxis;
+        deathsGraphYAxis = objetoTest.deaths.byRegion.yAxis;
+        deathsGraphLabel = objetoTest.deaths.byRegion.label;
     }
     //
-    else if (graphTypeState == "mixByDay")
+    if (vaccinationisGraphType == "vaccinationsByDay")
     {
-        graphKind = "line";
-        graphXAxis = objetoTest.mix.byDay.xAxis;
-        graphYAxis = objetoTest.mix.byDay.yAxis;
-        graphLabel = objetoTest.mix.byDay.label;
+        vaccinationsGraphKind = "line";
+        vaccinationsGraphXAxis = objetoTest.vaccinations.byDay.xAxis;
+        vaccinationsGraphYAxis = objetoTest.vaccinations.byDay.yAxis;
+        vaccinationsGraphLabel = objetoTest.vaccinations.byDay.label;
     }
-    else if (graphTypeState == "mixByMonth")
+    else if (vaccinationisGraphType == "vaccinationsByMonth")
     {
-        graphKind = "bar";
-        graphXAxis = objetoTest.mix.byMonth.xAxis;
-        graphYAxis = objetoTest.mix.byMonth.yAxis;
-        graphLabel = objetoTest.mix.byMonth.label;
+        vaccinationsGraphKind = "bar";
+        vaccinationsGraphXAxis = objetoTest.vaccinations.byMonth.xAxis;
+        vaccinationsGraphYAxis = objetoTest.vaccinations.byMonth.yAxis;
+        vaccinationsGraphLabel = objetoTest.vaccinations.byMonth.label;
     }
-    else if (graphTypeState == "mixByRegion")
+    else if (vaccinationisGraphType == "vaccinationsByRegion")
     {
-        graphKind = "pie";
-        graphXAxis = objetoTest.mix.byRegion.xAxis;
-        graphYAxis = objetoTest.mix.byRegion.yAxis;
-        graphLabel = objetoTest.mix.byRegion.label;
+        vaccinationsGraphKind = "pie";
+        vaccinationsGraphXAxis = objetoTest.vaccinations.byRegion.xAxis;
+        vaccinationsGraphYAxis = objetoTest.vaccinations.byRegion.yAxis;
+        vaccinationsGraphLabel = objetoTest.vaccinations.byRegion.label;
+    }
+    //
+    if (mixGraphType == "mixByDay")
+    {
+        mixGraphKind = "line";
+        mixGraphXAxis = objetoTest.mix.byDay.xAxis;
+        mixGraphYAxis = objetoTest.mix.byDay.yAxis;
+        mixGraphLabel = objetoTest.mix.byDay.label;
+    }
+    else if (mixGraphType == "mixByMonth")
+    {
+        mixGraphKind = "bar";
+        mixGraphXAxis = objetoTest.mix.byMonth.xAxis;
+        mixGraphYAxis = objetoTest.mix.byMonth.yAxis;
+        mixGraphLabel = objetoTest.mix.byMonth.label;
+    }
+    else if (mixGraphType == "mixByRegion")
+    {
+        mixGraphKind = "pie";
+        mixGraphXAxis = objetoTest.mix.byRegion.xAxis;
+        mixGraphYAxis = objetoTest.mix.byRegion.yAxis;
+        mixGraphLabel = objetoTest.mix.byRegion.label;
     }
 
     //
     //Colorblind
     //
-    const [lightColor, setLightColor] = useState('#007965'); 
-    const [normalColor, setNormalColor] = useState('#018383'); 
-    const [darkColor, setDarkColor] = useState('#2d6187'); 
-    const [lineColor, setLineColor] = useState('#75daad');
+    const [casesLightColor, setCasesLightColor] = useState('#007965'); 
+    const [casesNormalColor, setCasesNormalColor] = useState('#018383'); 
+    const [casesDarkColor, setCasesDarkColor] = useState('#2d6187'); 
+    const [casesLineColor, setCasesLineColor] = useState('#75daad');
+    //
+    const [deathsLightColor, setDeathsLightColor] = useState('#007965'); 
+    const [deathsNormalColor, setDeathsNormalColor] = useState('#018383'); 
+    const [deathsDarkColor, setDeathsDarkColor] = useState('#2d6187'); 
+    const [deathsLineColor, setDeathsLineColor] = useState('#75daad');
+    //
+    const [vaccinationsLightColor, setVaccinationsLightColor] = useState('#007965'); 
+    const [vaccinationsNormalColor, setVaccinationsNormalColor] = useState('#018383'); 
+    const [vaccinationsDarkColor, setVaccinationsDarkColor] = useState('#2d6187'); 
+    const [vaccinationsLineColor, setVaccinationsLineColor] = useState('#75daad');
+    //
+    const [mixLightColor, setMixLightColor] = useState('#007965'); 
+    const [mixNormalColor, setMixNormalColor] = useState('#018383'); 
+    const [mixDarkColor, setMixDarkColor] = useState('#2d6187'); 
+    const [mixLineColor, setMixLineColor] = useState('#75daad');
 
-    function pieColorAmount () {
+    function pieColorAmount (lightColor, normalColor, darkColor, graphYAxis) {
         var colors = [];
         var count = 0;
         for (var i = 0; i < graphYAxis.length; i++)
@@ -207,7 +240,7 @@ function Content() {
         return colors;
     }
 
-    function lineAndBarColorAmount () {
+    function lineAndBarColorAmount (normalColor, graphYAxis) {
         var colors = [];
         for (var i = 0; i < graphYAxis.length; i++)
         {
@@ -217,34 +250,27 @@ function Content() {
         return colors;
     } 
 
-    //
-    //Graph Tab
-    //
-    //const [tabType, setTabType] = useState("Cases");
-
-
     return <div className="content">
-        {/* <GraphTab setTabType={setTabType}/> */}
         
         <div className="graphRow padding">
             {/*Cases*/}
             <div className="graphColumn">
                 <div className="graphOptions">
                     <span className="span"></span>
-                    <GraphSelector tabType={"Cases"} graphType={graphTypeState} setGraphType={setGraphTypeState}/>
-                    <ColorblindButton setLightColor={setLightColor} setNormalColor={setNormalColor} setDarkColor={setDarkColor} setLineColor={setLineColor}/>
+                    <GraphSelector tabType={"Cases"} graphType={casesGraphType} setGraphType={setCasesGraphType}/>
+                    <ColorblindButton setLightColor={setCasesLightColor} setNormalColor={setCasesNormalColor} setDarkColor={setCasesDarkColor} setLineColor={setCasesLineColor}/>
                 </div>
-                <Graph graph={graphKind} xAxis={graphXAxis} yAxis={graphYAxis} Label={graphLabel} colors={graphKind === "pie" ? pieColorAmount() : lineAndBarColorAmount} lineColor={lineColor}/>
+                <Graph graph={casesGraphKind} xAxis={casesGraphXAxis} yAxis={casesGraphYAxis} Label={casesGraphLabel} colors={casesGraphKind === "pie" ? pieColorAmount(casesLightColor, casesNormalColor, casesDarkColor, casesGraphYAxis) : lineAndBarColorAmount(casesNormalColor, casesGraphYAxis)} lineColor={casesLineColor}/>
             </div>
             
             {/*Deaths*/}
             <div className="graphColumn">
                 <div className="graphOptions">
                     <span className="span"></span>
-                    <GraphSelector tabType={"Deaths"} graphType={graphTypeState} setGraphType={setGraphTypeState}/>
-                    <ColorblindButton setLightColor={setLightColor} setNormalColor={setNormalColor} setDarkColor={setDarkColor} setLineColor={setLineColor}/>
+                    <GraphSelector tabType={"Deaths"} graphType={deathsGraphType} setGraphType={setDeathsGraphType}/>
+                    <ColorblindButton setLightColor={setDeathsLightColor} setNormalColor={setDeathsNormalColor} setDarkColor={setDeathsDarkColor} setLineColor={setDeathsLineColor}/>
                 </div>
-                <Graph graph={graphKind} xAxis={graphXAxis} yAxis={graphYAxis} Label={graphLabel} colors={graphKind === "pie" ? pieColorAmount() : lineAndBarColorAmount} lineColor={lineColor}/>
+                <Graph graph={deathsGraphKind} xAxis={deathsGraphXAxis} yAxis={deathsGraphYAxis} Label={deathsGraphLabel} colors={deathsGraphKind === "pie" ? pieColorAmount(deathsLightColor, deathsNormalColor, deathsDarkColor, deathsGraphYAxis) : lineAndBarColorAmount(deathsNormalColor, deathsGraphYAxis)} lineColor={deathsLineColor}/>
             </div>
         </div>
         
@@ -253,20 +279,20 @@ function Content() {
             <div className="graphColumn">
                 <div className="graphOptions">
                     <span className="span"></span>
-                    <GraphSelector tabType={"Vaccinations"} graphType={graphTypeState} setGraphType={setGraphTypeState}/>
-                    <ColorblindButton setLightColor={setLightColor} setNormalColor={setNormalColor} setDarkColor={setDarkColor} setLineColor={setLineColor}/>
+                    <GraphSelector tabType={"Vaccinations"} graphType={vaccinationisGraphType} setGraphType={setVaccinationsGraphType}/>
+                    <ColorblindButton setLightColor={setVaccinationsLightColor} setNormalColor={setVaccinationsNormalColor} setDarkColor={setVaccinationsDarkColor} setLineColor={setVaccinationsLineColor}/>
                 </div>
-                <Graph graph={graphKind} xAxis={graphXAxis} yAxis={graphYAxis} Label={graphLabel} colors={graphKind === "pie" ? pieColorAmount() : lineAndBarColorAmount} lineColor={lineColor}/>
+                <Graph graph={vaccinationsGraphKind} xAxis={vaccinationsGraphXAxis} yAxis={vaccinationsGraphYAxis} Label={vaccinationsGraphLabel} colors={vaccinationsGraphKind === "pie" ? pieColorAmount(vaccinationsLightColor, vaccinationsNormalColor, vaccinationsDarkColor, vaccinationsGraphYAxis) : lineAndBarColorAmount(vaccinationsNormalColor, vaccinationsGraphYAxis)} lineColor={vaccinationsLineColor}/>
             </div>
 
             {/*Mix*/}
             <div className="graphColumn">
                 <div className="graphOptions">
                     <span className="span"></span>
-                    <GraphSelector tabType={"Mix"} graphType={graphTypeState} setGraphType={setGraphTypeState}/>
-                    <ColorblindButton setLightColor={setLightColor} setNormalColor={setNormalColor} setDarkColor={setDarkColor} setLineColor={setLineColor}/>
+                    <GraphSelector tabType={"Mix"} graphType={mixGraphType} setGraphType={setMixGraphType}/>
+                    <ColorblindButton setLightColor={setMixLightColor} setNormalColor={setMixNormalColor} setDarkColor={setMixDarkColor} setLineColor={setMixLineColor}/>
                 </div>
-                <Graph graph={graphKind} xAxis={graphXAxis} yAxis={graphYAxis} Label={graphLabel} colors={graphKind === "pie" ? pieColorAmount() : lineAndBarColorAmount} lineColor={lineColor}/>
+                <Graph graph={mixGraphKind} xAxis={mixGraphXAxis} yAxis={mixGraphYAxis} Label={mixGraphLabel} colors={mixGraphKind === "pie" ? pieColorAmount(mixLightColor, mixNormalColor, mixDarkColor, mixGraphYAxis) : lineAndBarColorAmount(mixNormalColor, mixGraphYAxis)} lineColor={mixLineColor}/>
             </div>
         </div>
     </div>

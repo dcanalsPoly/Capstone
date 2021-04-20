@@ -71,7 +71,12 @@ function Graph (props) {
             options={options}>
         </Pie>
         </div>
-
+      }
+      else {
+        return <div className="graph" id="graphs">
+        <Pie>
+        </Pie>
+        </div>
       }
     
 }
