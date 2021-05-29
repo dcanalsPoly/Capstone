@@ -26,3 +26,15 @@
   font-size: calc(10px + 2vmin);
   color: white;
 } */
+
+.menuButton {
+  font-family: "Arial"; /*Arial, Lucida Sans Unicode, Arial Narrow*/
+  font-weight: 300;
+  font-size: 5mm;
+  letter-spacing: 0.5mm;
+  background-color: #71b38b;
+  color: white;
+  box-shadow: none;
+  border: 0;
+  cursor: pointer;
+}

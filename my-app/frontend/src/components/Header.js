@@ -4,6 +4,7 @@ import SummaryTable from './SummaryTable';
 
 function Header () {
 
+    console.log("In header")
     return <div className="header">
         <NavBar/>
         <div className="headerRow">
