@@ -6,8 +6,8 @@ function GraphTab (props) {
     
     const [casesIndicator, setCasesIndicator] = useState("lineIndicator");
     const [deathsIndicator, setDeathsIndicator] = useState("invisibleIndicator");
-    const [vaccinationsIndicator, setVaccinationsIndicator] = useState("invisibleIndicator");
-    const [mixIndicator, setMixIndicator] = useState("invisibleIndicator");
+    const [recoveredIndicator, setRecoveredIndicator] = useState("invisibleIndicator");
+    const [activeIndicator, setActiveIndicator] = useState("invisibleIndicator");
 
     function showIndicator (indicator) {
         if (indicator === "Cases")
@@ -15,33 +15,33 @@ function GraphTab (props) {
             
             setCasesIndicator("lineIndicator");
             setDeathsIndicator("invisibleIndicator");
-            setVaccinationsIndicator("invisibleIndicator");
-            setMixIndicator("invisibleIndicator");
+            setRecoveredIndicator("invisibleIndicator");
+            setActiveIndicator("invisibleIndicator");
             props.setTabType("Cases");
         }
         else if (indicator === "Deaths") {
             
             setCasesIndicator("invisibleIndicator");
             setDeathsIndicator("lineIndicator");
-            setVaccinationsIndicator("invisibleIndicator");
-            setMixIndicator("invisibleIndicator");
+            setRecoveredIndicator("invisibleIndicator");
+            setActiveIndicator("invisibleIndicator");
             props.setTabType("Deaths");
         }
-        else if (indicator === "Vaccinations") {
+        else if (indicator === "Recovered") {
             
             setCasesIndicator("invisibleIndicator");
             setDeathsIndicator("invisibleIndicator");
-            setVaccinationsIndicator("lineIndicator");
-            setMixIndicator("invisibleIndicator");
-            props.setTabType("Vaccinations");
+            setRecoveredIndicator("lineIndicator");
+            setActiveIndicator("invisibleIndicator");
+            props.setTabType("Recovered");
         }
-        else if (indicator === "Mix") {
+        else if (indicator === "Active") {
             
             setCasesIndicator("invisibleIndicator");
             setDeathsIndicator("invisibleIndicator");
-            setVaccinationsIndicator("invisibleIndicator");
-            setMixIndicator("lineIndicator");
-            props.setTabType("Mix");
+            setRecoveredIndicator("invisibleIndicator");
+            setActiveIndicator("lineIndicator");
+            props.setTabType("Active");
         }
     }
 
@@ -55,12 +55,12 @@ function GraphTab (props) {
             <hr className={deathsIndicator}></hr>
         </div>
         <div className="tabColumn">
-            <span className="tabText" onClick={() => showIndicator("Vaccinations")}>Vaccinations</span>
-            <hr className={vaccinationsIndicator}></hr>
+            <span className="tabText" onClick={() => showIndicator("Recovered")}>Recovered</span>
+            <hr className={recoveredIndicator}></hr>
         </div>
         <div className="tabColumn">
-            <span className="tabText" onClick={() => showIndicator("Mix")}>Mix</span>
-            <hr className={mixIndicator}></hr>
+            <span className="tabText" onClick={() => showIndicator("Active")}>Active</span>
+            <hr className={activeIndicator}></hr>
         </div>
 
     </div>

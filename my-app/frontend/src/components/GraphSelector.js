@@ -28,27 +28,27 @@ function GraphSelector (props) {
             </div>
         </div>
     }
-    else if (props.tabType === "Vaccinations")
+    else if (props.tabType === "Recovered")
     {
         return <div className="selectDiv">
             <div className="dropDiv">
                 <select className= "tester dropButton customH2Dark" onChange={(e) => {props.setGraphType(e.target.value);}}>
-                    <option value="vaccinationsByDay">Vaccinations by Day</option>
-                    <option value="vaccinationsByMonth">Vaccinations by Month</option>
-                    <option value="vaccinationsByRegion">Vaccinations by Region</option>
+                    <option value="recoveredByDay">Recovered by Day</option>
+                    <option value="recoveredByMonth">Recovered by Month</option>
+                    <option value="recoveredByRegion">Recovered by Region</option>
                 </select>
             </div>
         </div>
     }
     //set up this part
-    else if (props.tabType === "Mix")
+    else if (props.tabType === "Active")
     {
         return <div className="selectDiv">
             <div className="dropDiv">
                 <select className= "tester dropButton customH2Dark" onChange={(e) => {props.setGraphType(e.target.value);}}>
-                    <option value="mixByDay">Mix by Day</option>
-                    <option value="mixByMonth">Mix by Month</option>
-                    <option value="mixByRegion">Mix by Region</option>
+                    <option value="activeByDay">Active by Day</option>
+                    <option value="activeByMonth">Active by Month</option>
+                    <option value="activeByRegion">Active by Region</option>
                 </select>
             </div>
         </div>

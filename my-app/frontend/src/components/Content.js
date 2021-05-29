@@ -3,16 +3,44 @@ import Graph from './Graph';
 import ColorblindButton from './ColorblindButton';
 import GraphSelector from './GraphSelector';
 import GraphTab from './GraphTab';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+//import axios from "axios";
 
 function Content() {
+    //
+    //Country Selection
+    //
+    const [selection, setSelection] = useState("argentina");
+    var countries = ["portugal", "south-africa", "denmark", "thailand", "uruguay", "argentina", "philippines", "bahamas", "jamaica", "taiwan", "greece", "cuba", "panama", "egypt", "norway", "dominican-republic", "guatemala", "south-korea", "venezuela", "israel"];
+    //
+    //Data Recollection
+    //
+    const [countryData, setCountryData] = useState({});  
+    var counter = 0;
+    const dataFetch = async () => {
+        console.log('entered the dataFetc');
+        await fetch('https://api.covid19api.com/live/country/' + selection + '/status/confirmed?from=2021-03-24T00:00:00Z&to=2021-04-01T00:00:00Z')
+            .then(response => response.json())
+            .then(data => 
+                {
+                    setCountryData(data[0]);
+                    console.log(data[0]);
+                    console.log(countryData);
+                });
+        counter++;
+    };
+    useEffect(() => {
+        if (counter == 0)
+            dataFetch();
+    }, []);
+
     //
     //Graph dropdown
     //
     const [casesGraphType, setCasesGraphType] = useState("casesByDay");
     const [deathsGraphType, setDeathsGraphType] = useState("deathsByDay");
-    const [vaccinationisGraphType, setVaccinationsGraphType] = useState("vaccinationsByDay");
-    const [mixGraphType, setMixGraphType] = useState("mixByDay");
+    const [recoveredGraphType, setRecoveredGraphType] = useState("recoveredByDay");
+    const [activeGraphType, setActiveGraphType] = useState("activeByDay");
 
     var casesGraphKind;
     var casesGraphXAxis = [];
@@ -24,21 +52,21 @@ function Content() {
     var deathsGraphYAxis = [];
     var deathsGraphLabel = [];
     //
-    var vaccinationsGraphKind;
-    var vaccinationsGraphXAxis = [];
-    var vaccinationsGraphYAxis = [];
-    var vaccinationsGraphLabel = [];
+    var recoveredGraphKind;
+    var recoveredGraphXAxis = [];
+    var recoveredGraphYAxis = [];
+    var recoveredGraphLabel = [];
     //
-    var mixGraphKind;
-    var mixGraphXAxis = [];
-    var mixGraphYAxis = [];
-    var mixGraphLabel = [];
+    var activeGraphKind;
+    var activeGraphXAxis = [];
+    var activeGraphYAxis = [];
+    var activeGraphLabel = [];
 
     var objetoTest = {
         cases:{
             byDay:{
                 xAxis: ["7", "8", "9", "10", "11", "12", "13"],
-                yAxis: [120, 190, 300, 500, 200, 300, 330],
+                yAxis: [1200, 1900, 3000, 5000, 2000, 3000],
                 label: "Positive Cases"
             },
             byMonth:{
@@ -69,59 +97,59 @@ function Content() {
                 label: "# of Deaths"
             },
         },
-        vaccinations:{
+        recovered:{
             byDay:{
                 xAxis: ["7", "8", "9", "10", "11", "12", "13"],
                 yAxis: [120, 190, 300, 500, 200, 300, 330],
-                label: "# of Vaccinations"
+                label: "# of Recovered"
             },
             byMonth:{
                 xAxis: ["November, 20","December, 20","January, 21","February, 21","March, 21", "April, 21"],
                 yAxis: [1200, 1900, 3000, 5000, 2000, 3000],
-                label: "# of Vaccinations"
+                label: "# of Recovered"
             },
             byRegion:{
                 xAxis: ["Region 1", "Region 2", "Region 3", "Region 4", "Region 5", "Region 6", ],
                 yAxis: [1200, 190, 300, 50, 2000, 30000],
-                label: "# of Vaccinations"
+                label: "# of Recovered"
             },
         },
         //we have to set up this to work with more than one dataset
-        mix:{
+        active:{
             byDay:{
                 xAxis: ["7", "8", "9", "10", "11", "12", "13"],
                 yAxis: [120, 190, 300, 500, 200, 300, 330],
-                label: "# of Mix"
+                label: "# of Active"
             },
             byMonth:{
                 xAxis: ["November, 20","December, 20","January, 21","February, 21","March, 21", "April, 21"],
                 yAxis: [1200, 1900, 3000, 5000, 2000, 3000],
-                label: "# of Mix"
+                label: "# of Active"
             },
             byRegion:{
                 xAxis: ["Region 1", "Region 2", "Region 3", "Region 4", "Region 5", "Region 6", ],
                 yAxis: [1200, 190, 300, 50, 2000, 30000],
-                label: "# of Mix"
+                label: "# of Active"
             },
         }
     };
 
 
-    if (casesGraphType == "casesByDay")
+    if (casesGraphType === "casesByDay")
     {
         casesGraphKind = "line";
         casesGraphXAxis = objetoTest.cases.byDay.xAxis;
         casesGraphYAxis = objetoTest.cases.byDay.yAxis;
         casesGraphLabel = objetoTest.cases.byDay.label;
     }
-    else if (casesGraphType == "casesByMonth")
+    else if (casesGraphType === "casesByMonth")
     {
         casesGraphKind = "bar";
         casesGraphXAxis = objetoTest.cases.byMonth.xAxis;
         casesGraphYAxis = objetoTest.cases.byMonth.yAxis;
         casesGraphLabel = objetoTest.cases.byMonth.label;
     }
-    else if (casesGraphType == "casesByRegion")
+    else if (casesGraphType === "casesByRegion")
     {
         casesGraphKind = "pie";
         casesGraphXAxis = objetoTest.cases.byRegion.xAxis;
@@ -129,21 +157,21 @@ function Content() {
         casesGraphLabel = objetoTest.cases.byRegion.label;
     }
     //
-    if (deathsGraphType == "deathsByDay")
+    if (deathsGraphType === "deathsByDay")
     {
         deathsGraphKind = "line";
         deathsGraphXAxis = objetoTest.deaths.byDay.xAxis;
         deathsGraphYAxis = objetoTest.deaths.byDay.yAxis;
         deathsGraphLabel = objetoTest.deaths.byDay.label;
     }
-    else if (deathsGraphType == "deathsByMonth")
+    else if (deathsGraphType === "deathsByMonth")
     {
         deathsGraphKind = "bar";
         deathsGraphXAxis = objetoTest.deaths.byMonth.xAxis;
         deathsGraphYAxis = objetoTest.deaths.byMonth.yAxis;
         deathsGraphLabel = objetoTest.deaths.byMonth.label;
     }
-    else if (deathsGraphType == "deathsByRegion")
+    else if (deathsGraphType === "deathsByRegion")
     {
         deathsGraphKind = "pie";
         deathsGraphXAxis = objetoTest.deaths.byRegion.xAxis;
@@ -151,52 +179,52 @@ function Content() {
         deathsGraphLabel = objetoTest.deaths.byRegion.label;
     }
     //
-    if (vaccinationisGraphType == "vaccinationsByDay")
+    if (recoveredGraphType === "recoveredByDay")
     {
-        vaccinationsGraphKind = "line";
-        vaccinationsGraphXAxis = objetoTest.vaccinations.byDay.xAxis;
-        vaccinationsGraphYAxis = objetoTest.vaccinations.byDay.yAxis;
-        vaccinationsGraphLabel = objetoTest.vaccinations.byDay.label;
+        recoveredGraphKind = "line";
+        recoveredGraphXAxis = objetoTest.recovered.byDay.xAxis;
+        recoveredGraphYAxis = objetoTest.recovered.byDay.yAxis;
+        recoveredGraphLabel = objetoTest.recovered.byDay.label;
     }
-    else if (vaccinationisGraphType == "vaccinationsByMonth")
+    else if (recoveredGraphType === "recoveredByMonth")
     {
-        vaccinationsGraphKind = "bar";
-        vaccinationsGraphXAxis = objetoTest.vaccinations.byMonth.xAxis;
-        vaccinationsGraphYAxis = objetoTest.vaccinations.byMonth.yAxis;
-        vaccinationsGraphLabel = objetoTest.vaccinations.byMonth.label;
+        recoveredGraphKind = "bar";
+        recoveredGraphXAxis = objetoTest.recovered.byMonth.xAxis;
+        recoveredGraphYAxis = objetoTest.recovered.byMonth.yAxis;
+        recoveredGraphLabel = objetoTest.recovered.byMonth.label;
     }
-    else if (vaccinationisGraphType == "vaccinationsByRegion")
+    else if (recoveredGraphType === "recoveredByRegion")
     {
-        vaccinationsGraphKind = "pie";
-        vaccinationsGraphXAxis = objetoTest.vaccinations.byRegion.xAxis;
-        vaccinationsGraphYAxis = objetoTest.vaccinations.byRegion.yAxis;
-        vaccinationsGraphLabel = objetoTest.vaccinations.byRegion.label;
+        recoveredGraphKind = "pie";
+        recoveredGraphXAxis = objetoTest.recovered.byRegion.xAxis;
+        recoveredGraphYAxis = objetoTest.recovered.byRegion.yAxis;
+        recoveredGraphLabel = objetoTest.recovered.byRegion.label;
     }
     //
-    if (mixGraphType == "mixByDay")
+    if (activeGraphType === "activeByDay")
     {
-        mixGraphKind = "line";
-        mixGraphXAxis = objetoTest.mix.byDay.xAxis;
-        mixGraphYAxis = objetoTest.mix.byDay.yAxis;
-        mixGraphLabel = objetoTest.mix.byDay.label;
+        activeGraphKind = "line";
+        activeGraphXAxis = objetoTest.active.byDay.xAxis;
+        activeGraphYAxis = objetoTest.active.byDay.yAxis;
+        activeGraphLabel = objetoTest.active.byDay.label;
     }
-    else if (mixGraphType == "mixByMonth")
+    else if (activeGraphType === "activeByMonth")
     {
-        mixGraphKind = "bar";
-        mixGraphXAxis = objetoTest.mix.byMonth.xAxis;
-        mixGraphYAxis = objetoTest.mix.byMonth.yAxis;
-        mixGraphLabel = objetoTest.mix.byMonth.label;
+        activeGraphKind = "bar";
+        activeGraphXAxis = objetoTest.active.byMonth.xAxis;
+        activeGraphYAxis = objetoTest.active.byMonth.yAxis;
+        activeGraphLabel = objetoTest.active.byMonth.label;
     }
-    else if (mixGraphType == "mixByRegion")
+    else if (activeGraphType === "activeByRegion")
     {
-        mixGraphKind = "pie";
-        mixGraphXAxis = objetoTest.mix.byRegion.xAxis;
-        mixGraphYAxis = objetoTest.mix.byRegion.yAxis;
-        mixGraphLabel = objetoTest.mix.byRegion.label;
+        activeGraphKind = "pie";
+        activeGraphXAxis = objetoTest.active.byRegion.xAxis;
+        activeGraphYAxis = objetoTest.active.byRegion.yAxis;
+        activeGraphLabel = objetoTest.active.byRegion.label;
     }
 
     //
-    //Colorblind
+    //Colorblind Variables
     //
     const [casesLightColor, setCasesLightColor] = useState('#007965'); 
     const [casesNormalColor, setCasesNormalColor] = useState('#018383'); 
@@ -208,15 +236,15 @@ function Content() {
     const [deathsDarkColor, setDeathsDarkColor] = useState('#2d6187'); 
     const [deathsLineColor, setDeathsLineColor] = useState('#75daad');
     //
-    const [vaccinationsLightColor, setVaccinationsLightColor] = useState('#007965'); 
-    const [vaccinationsNormalColor, setVaccinationsNormalColor] = useState('#018383'); 
-    const [vaccinationsDarkColor, setVaccinationsDarkColor] = useState('#2d6187'); 
-    const [vaccinationsLineColor, setVaccinationsLineColor] = useState('#75daad');
+    const [recoveredLightColor, setRecoveredLightColor] = useState('#007965'); 
+    const [recoveredNormalColor, setRecoveredNormalColor] = useState('#018383'); 
+    const [recoveredDarkColor, setRecoveredDarkColor] = useState('#2d6187'); 
+    const [recoveredLineColor, setRecoveredLineColor] = useState('#75daad');
     //
-    const [mixLightColor, setMixLightColor] = useState('#007965'); 
-    const [mixNormalColor, setMixNormalColor] = useState('#018383'); 
-    const [mixDarkColor, setMixDarkColor] = useState('#2d6187'); 
-    const [mixLineColor, setMixLineColor] = useState('#75daad');
+    const [activeLightColor, setActiveLightColor] = useState('#007965'); 
+    const [activeNormalColor, setActiveNormalColor] = useState('#018383'); 
+    const [activeDarkColor, setActiveDarkColor] = useState('#2d6187'); 
+    const [activeLineColor, setActiveLineColor] = useState('#75daad');
 
     function pieColorAmount (lightColor, normalColor, darkColor, graphYAxis) {
         var colors = [];
@@ -251,7 +279,33 @@ function Content() {
     } 
 
     return <div className="content">
-        
+        <div className="selectDiv">
+            <div className="dropDiv">
+                <select className= "tester dropButton customH2Dark" onChange={(e) => {setSelection(e.target.value);}}>
+                    <option value="argentina">Argentina</option>
+                    <option value="bahamas">Bahamas</option>
+                    <option value="cuba">Cuba</option>
+                    <option value="denmark">Denmark</option>
+                    <option value="dominican-republic">Dominican Republic</option>
+                    <option value="egypt">Egypt</option>
+                    <option value="greece">Greece</option>
+                    <option value="guatemala">Guatemala</option>
+                    <option value="israel">Israel</option>
+                    <option value="jamaica">Jamaica</option>
+                    <option value="norway">Norway</option>
+                    <option value="panama">Panama</option>
+                    <option value="philippines">Philippines</option>
+                    <option value="portugal">Portugal</option>
+                    <option value="south-africa">South Africa</option>
+                    <option value="south-korea">South Korea</option>
+                    <option value="taiwan">Taiwan</option>                    
+                    <option value="thailand">Thailand</option>
+                    <option value="uruguay">Uruguay</option>
+                    <option value="venezuela">Venezuela</option>
+                </select>
+            </div>
+        </div>
+
         <div className="graphRow padding">
             {/*Cases*/}
             <div className="graphColumn">
@@ -275,69 +329,26 @@ function Content() {
         </div>
         
         <div className="graphRow padding">
-            {/*Vaccinations*/}
+            {/*Recovered*/}
             <div className="graphColumn">
                 <div className="graphOptions">
                     <span className="span"></span>
-                    <GraphSelector tabType={"Vaccinations"} graphType={vaccinationisGraphType} setGraphType={setVaccinationsGraphType}/>
-                    <ColorblindButton setLightColor={setVaccinationsLightColor} setNormalColor={setVaccinationsNormalColor} setDarkColor={setVaccinationsDarkColor} setLineColor={setVaccinationsLineColor}/>
+                    <GraphSelector tabType={"Recovered"} graphType={recoveredGraphType} setGraphType={setRecoveredGraphType}/>
+                    <ColorblindButton setLightColor={setRecoveredLightColor} setNormalColor={setRecoveredNormalColor} setDarkColor={setRecoveredDarkColor} setLineColor={setRecoveredLineColor}/>
                 </div>
-                <Graph graph={vaccinationsGraphKind} xAxis={vaccinationsGraphXAxis} yAxis={vaccinationsGraphYAxis} Label={vaccinationsGraphLabel} colors={vaccinationsGraphKind === "pie" ? pieColorAmount(vaccinationsLightColor, vaccinationsNormalColor, vaccinationsDarkColor, vaccinationsGraphYAxis) : lineAndBarColorAmount(vaccinationsNormalColor, vaccinationsGraphYAxis)} lineColor={vaccinationsLineColor}/>
+                <Graph graph={recoveredGraphKind} xAxis={recoveredGraphXAxis} yAxis={recoveredGraphYAxis} Label={recoveredGraphLabel} colors={recoveredGraphKind === "pie" ? pieColorAmount(recoveredLightColor, recoveredNormalColor, recoveredDarkColor, recoveredGraphYAxis) : lineAndBarColorAmount(recoveredNormalColor, recoveredGraphYAxis)} lineColor={recoveredLineColor}/>
             </div>
 
-            {/*Mix*/}
+            {/*Active*/}
             <div className="graphColumn">
                 <div className="graphOptions">
                     <span className="span"></span>
-                    <GraphSelector tabType={"Mix"} graphType={mixGraphType} setGraphType={setMixGraphType}/>
-                    <ColorblindButton setLightColor={setMixLightColor} setNormalColor={setMixNormalColor} setDarkColor={setMixDarkColor} setLineColor={setMixLineColor}/>
+                    <GraphSelector tabType={"Active"} graphType={activeGraphType} setGraphType={setActiveGraphType}/>
+                    <ColorblindButton setLightColor={setActiveLightColor} setNormalColor={setActiveNormalColor} setDarkColor={setActiveDarkColor} setLineColor={setActiveLineColor}/>
                 </div>
-                <Graph graph={mixGraphKind} xAxis={mixGraphXAxis} yAxis={mixGraphYAxis} Label={mixGraphLabel} colors={mixGraphKind === "pie" ? pieColorAmount(mixLightColor, mixNormalColor, mixDarkColor, mixGraphYAxis) : lineAndBarColorAmount(mixNormalColor, mixGraphYAxis)} lineColor={mixLineColor}/>
+                <Graph graph={activeGraphKind} xAxis={activeGraphXAxis} yAxis={activeGraphYAxis} Label={activeGraphLabel} colors={activeGraphKind === "pie" ? pieColorAmount(activeLightColor, activeNormalColor, activeDarkColor, activeGraphYAxis) : lineAndBarColorAmount(activeNormalColor, activeGraphYAxis)} lineColor={activeLineColor}/>
             </div>
         </div>
     </div>
 }
 export default Content;
-
-// import React, { useState, useEffect } from 'react';
-// import axios from "axios";
-
-// function Content(props) {
-
-//     const [countryData, setCountryData] = useState([]);
-//     const [loading, setLoading] = useState(false);
-
-//     useEffect(() => {
-//         console.log("In Use Effect")
-//         const fetchData = async () => {
-//         const { data: result } = await axios.get('https://api.covid19api.com/country/' + props.country + '/status/confirmed?from=2021-03-24T00:00:00Z&to=2021-04-01T00:00:00Z');
-//         setCountryData(result);
-//         setLoading(false);
-//         console.log(result); // runs once
-//         };
-//         fetchData();
-//     }, [setCountryData, setLoading]);
-
-//     console.log(countryData); // runs 3 times
-
-//     // const [countryData, setCountryData] = useState(() => {
-//     //     fetch('https://api.covid19api.com/country/' + props.country + '/status/confirmed?from=2021-03-24T00:00:00Z&to=2021-04-01T00:00:00Z')
-//     //         .then(response => response.json())
-//     //         .then(data => setCountryData(data))
-//     // });  
-
-//     if (countryData) {
-//         countryData.forEach(element => console.log(element));
-//     }
-
-//     if (!countryData) {
-//         return <div>Waiting</div>
-//     }
-//     else if (countryData) {
-
-//         return <div className="content">
-//             <Graph graph = "line" myData = {countryData} />
-//         </div>
-//     }
-// }
-// export default Content;
