@@ -5,16 +5,14 @@ import './styling/customLabel.css';
 //npm install react-icons --save
 
 function SummaryTile(props) {
-
-    //change this to work within a function that checks the past statistic 
-    //and then choose if it went up (IoIosArrowUp), down (IoIosArrowDown) or didn't change (none)
-    //
-    //for the Total Month Summary turn the opacity of the arrow icon off 
+    
     var arrowIcon = IoIosArrowDown; 
     
     function roundUp(number) {
-        if (number >= 1000)
-            return (number/1000) + "k";
+        if (number >= 1000000)
+            return (number/1000000).toFixed(1) + "m";
+        else if (number >= 1000)
+            return (number/1000).toFixed(1) + "k";
         else 
             return number;
     }

@@ -2,7 +2,7 @@ import NavBar from './NavBar';
 import './Header.css';
 import SummaryTable from './SummaryTable';
 
-function Header () {
+function Header(props) {
 
     console.log("In header")
     return <div className="header">
@@ -13,7 +13,7 @@ function Header () {
                 <span className="headerText">visualization</span>
                 <span className="headerText">& analysis</span>
             </div>
-            <SummaryTable/>
+            <SummaryTable casesSummary={props.casesSummary} deathsSummary={props.deathsSummary} recoveredSummary={props.recoveredSummary}/>
         </div>
         
     </div>

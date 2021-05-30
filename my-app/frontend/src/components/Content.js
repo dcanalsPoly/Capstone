@@ -4,9 +4,10 @@ import ColorblindButton from './ColorblindButton';
 import GraphSelector from './GraphSelector';
 import GraphTab from './GraphTab';
 import React, { useState, useEffect } from 'react';
+import DataTable from './DataTable';
 //import axios from "axios";
 
-function Content() {
+function Content(props) {
     //
     //Country Selection
     //
@@ -24,11 +25,10 @@ function Content() {
 
     var counter = 0;
     const dataFetch = async (country) => {
-        await fetch('https://api.covid19api.com/live/country/' + country + '/status/confirmed?from='+ fromDate +'&to='+ toDate +'')
+        await fetch('https://api.covid19api.com/live/country/' + country + '/status/confirmed?from='+ fromDate +'&to='+ toDate + '')
             .then(response => response.json())
             .then(data => 
                 {   
-                    //var name = '';
                     const obj = {
                         active: [],
                         confirmed: [],
@@ -49,6 +49,10 @@ function Content() {
                     console.log(obj.dates);
                     console.log(obj.name);
                     setCountryData(obj);
+                    //
+                    props.setCasesSummary(obj.active[6]);
+                    props.setDeathsSummary(obj.deaths[6]);
+                    props.setRecoveredSummary(obj.recovered[6]);
                 });
         counter++;
     };
@@ -233,60 +237,61 @@ function Content() {
         return <div>Waiting...</div>
     }
     else if (countryData)
-    {return <div className="content">
-        <div className="selectDiv">
-            <div className="dropDiv">
-                <select className= "tester dropButton customH2Dark" onChange={(e) => {
-                        console.log('e.target.value', e.target.value);
-                        dataFetch(e.target.value);
-                    }}>
-                    <option value="argentina">Argentina</option>
-                    <option value="bahamas">Bahamas</option>
-                    <option value="cuba">Cuba</option>
-                    <option value="denmark">Denmark</option>
-                    <option value="dominican-republic">Dominican Republic</option>
-                    <option value="egypt">Egypt</option>
-                    <option value="greece">Greece</option>
-                    <option value="guatemala">Guatemala</option>
-                    <option value="israel">Israel</option>
-                    <option value="jamaica">Jamaica</option>
-                    <option value="norway">Norway</option>
-                    <option value="panama">Panama</option>
-                    <option value="philippines">Philippines</option>
-                    <option value="portugal">Portugal</option>
-                    <option value="south-africa">South Africa</option>
-                    <option value="south-korea">South Korea</option>
-                    <option value="taiwan">Taiwan</option>                    
-                    <option value="thailand">Thailand</option>
-                    <option value="uruguay">Uruguay</option>
-                    <option value="venezuela">Venezuela</option>
-                </select>
-            </div>
-        </div>
-
-        <div className="graphRow padding">
-            {/*Cases*/}
-            <div className="graphColumn">
-                <div className="graphOptions">
-                    <span className="span"></span>
-                    <GraphSelector tabType={"Cases"} graphType={casesGraphType} setGraphType={setCasesGraphType}/>
-                    <ColorblindButton setLightColor={setCasesLightColor} setNormalColor={setCasesNormalColor} setDarkColor={setCasesDarkColor} setLineColor={setCasesLineColor}/>
+    {
+        return <div className="content">
+            <div className="selectDiv">
+                <div className="dropDiv">
+                    <select className= "tester dropButton customH2Dark" onChange={(e) => {
+                            console.log('e.target.value', e.target.value);
+                            dataFetch(e.target.value);
+                        }}>
+                        <option value="argentina">Argentina</option>
+                        <option value="bahamas">Bahamas</option>
+                        <option value="cuba">Cuba</option>
+                        <option value="denmark">Denmark</option>
+                        <option value="dominican-republic">Dominican Republic</option>
+                        <option value="egypt">Egypt</option>
+                        <option value="greece">Greece</option>
+                        <option value="guatemala">Guatemala</option>
+                        <option value="israel">Israel</option>
+                        <option value="jamaica">Jamaica</option>
+                        <option value="norway">Norway</option>
+                        <option value="panama">Panama</option>
+                        <option value="philippines">Philippines</option>
+                        <option value="portugal">Portugal</option>
+                        <option value="south-africa">South Africa</option>
+                        <option value="south-korea">South Korea</option>
+                        <option value="taiwan">Taiwan</option>                    
+                        <option value="thailand">Thailand</option>
+                        <option value="uruguay">Uruguay</option>
+                        <option value="venezuela">Venezuela</option>
+                    </select>
                 </div>
-                <Graph graph={casesGraphKind} xAxis={casesGraphXAxis} yAxis={casesGraphYAxis} Label={casesGraphLabel} colors={casesGraphKind === "pie" ? pieColorAmount(casesLightColor, casesNormalColor, casesDarkColor, casesGraphYAxis) : lineAndBarColorAmount(casesNormalColor, casesGraphYAxis)} lineColor={casesLineColor}/>
+            </div>
+
+            <div className="graphRow padding">
+                {/*Cases*/}
+                <div className="graphColumn">
+                    <div className="graphOptions">
+                        <span className="span"></span>
+                        <GraphSelector tabType={"Cases"} graphType={casesGraphType} setGraphType={setCasesGraphType}/>
+                        <ColorblindButton setLightColor={setCasesLightColor} setNormalColor={setCasesNormalColor} setDarkColor={setCasesDarkColor} setLineColor={setCasesLineColor}/>
+                    </div>
+                    <Graph graph={casesGraphKind} xAxis={casesGraphXAxis} yAxis={casesGraphYAxis} Label={casesGraphLabel} colors={casesGraphKind === "pie" ? pieColorAmount(casesLightColor, casesNormalColor, casesDarkColor, casesGraphYAxis) : lineAndBarColorAmount(casesNormalColor, casesGraphYAxis)} lineColor={casesLineColor}/>
+                </div>
+                
+                {/*Deaths*/}
+                <div className="graphColumn">
+                    <div className="graphOptions">
+                        <span className="span"></span>
+                        <GraphSelector tabType={"Deaths"} graphType={deathsGraphType} setGraphType={setDeathsGraphType}/>
+                        <ColorblindButton setLightColor={setDeathsLightColor} setNormalColor={setDeathsNormalColor} setDarkColor={setDeathsDarkColor} setLineColor={setDeathsLineColor}/>
+                    </div>
+                    <Graph graph={deathsGraphKind} xAxis={deathsGraphXAxis} yAxis={deathsGraphYAxis} Label={deathsGraphLabel} colors={deathsGraphKind === "pie" ? pieColorAmount(deathsLightColor, deathsNormalColor, deathsDarkColor, deathsGraphYAxis) : lineAndBarColorAmount(deathsNormalColor, deathsGraphYAxis)} lineColor={deathsLineColor}/>
+                </div>
             </div>
             
-            {/*Deaths*/}
-            <div className="graphColumn">
-                <div className="graphOptions">
-                    <span className="span"></span>
-                    <GraphSelector tabType={"Deaths"} graphType={deathsGraphType} setGraphType={setDeathsGraphType}/>
-                    <ColorblindButton setLightColor={setDeathsLightColor} setNormalColor={setDeathsNormalColor} setDarkColor={setDeathsDarkColor} setLineColor={setDeathsLineColor}/>
-                </div>
-                <Graph graph={deathsGraphKind} xAxis={deathsGraphXAxis} yAxis={deathsGraphYAxis} Label={deathsGraphLabel} colors={deathsGraphKind === "pie" ? pieColorAmount(deathsLightColor, deathsNormalColor, deathsDarkColor, deathsGraphYAxis) : lineAndBarColorAmount(deathsNormalColor, deathsGraphYAxis)} lineColor={deathsLineColor}/>
-            </div>
-        </div>
-        
-        <div className="graphRow padding">
+            <div className="graphRow padding">
             {/*Recovered*/}
             <div className="graphColumn">
                 <div className="graphOptions">
@@ -307,6 +312,10 @@ function Content() {
                 <Graph graph={activeGraphKind} xAxis={activeGraphXAxis} yAxis={activeGraphYAxis} Label={activeGraphLabel} colors={activeGraphKind === "pie" ? pieColorAmount(activeLightColor, activeNormalColor, activeDarkColor, activeGraphYAxis) : lineAndBarColorAmount(activeNormalColor, activeGraphYAxis)} lineColor={activeLineColor}/>
             </div>
         </div>
-    </div>}
+        
+            {/* <DataTable/> */}
+        </div>
+    }
+
 }
 export default Content;

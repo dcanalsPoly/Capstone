@@ -6,17 +6,14 @@ import Footer from './components/Footer';
 
 function App() {
   
-  // const [selection, setSelection] = useState("japan");
-
-  // console.log(selection)
+  const [casesSummary, setCasesSummary] = useState("false");
+  const [deathsSummary, setDeathsSummary] = useState("false");
+  const [recoveredSummary, setRecoveredSummary] = useState("false");
 
   return (
     <div className="App">
-      <Header/>
-      <Content/>
-      {/* <button className="menuButton" onClick={() => setSelection("spain")}>Spain</button>
-      <button className="menuButton" onClick={() => setSelection("south-africa")}>SouthAfrica</button>
-      <Content country = {selection}/> */}
+      <Header casesSummary={casesSummary} deathsSummary={deathsSummary} recoveredSummary={recoveredSummary}/>
+      <Content setCasesSummary={setCasesSummary} setDeathsSummary={setDeathsSummary} setRecoveredSummary={setRecoveredSummary}/>
       <Footer/>
     </div>
   );
