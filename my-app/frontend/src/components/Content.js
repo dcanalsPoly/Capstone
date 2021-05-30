@@ -10,28 +10,51 @@ function Content() {
     //
     //Country Selection
     //
-    const [selection, setSelection] = useState("argentina");
     var countries = ["portugal", "south-africa", "denmark", "thailand", "uruguay", "argentina", "philippines", "bahamas", "jamaica", "taiwan", "greece", "cuba", "panama", "egypt", "norway", "dominican-republic", "guatemala", "south-korea", "venezuela", "israel"];
     //
     //Data Recollection
     //
-    const [countryData, setCountryData] = useState({});  
+    const [countryData, setCountryData] = useState(false);  
+    console.log('countryData: ', countryData);    
+    //Date definitions
+    var toDate = new Date();
+    toDate.setDate(toDate.getDate() - 1);
+    var fromDate = new Date();
+    fromDate.setDate(fromDate.getDate() - 8);
+
     var counter = 0;
-    const dataFetch = async () => {
-        console.log('entered the dataFetc');
-        await fetch('https://api.covid19api.com/live/country/' + selection + '/status/confirmed?from=2021-03-24T00:00:00Z&to=2021-04-01T00:00:00Z')
+    const dataFetch = async (country) => {
+        await fetch('https://api.covid19api.com/live/country/' + country + '/status/confirmed?from='+ fromDate +'&to='+ toDate +'')
             .then(response => response.json())
             .then(data => 
-                {
-                    setCountryData(data[0]);
-                    console.log(data[0]);
-                    console.log(countryData);
+                {   
+                    //var name = '';
+                    const obj = {
+                        active: [],
+                        confirmed: [],
+                        deaths: [],
+                        recovered: [],
+                        dates: [],
+                        name: '',
+                    };
+                    data.forEach(e => {
+                        obj.active.push(e.Active);
+                        obj.confirmed.push(e.Confirmed);
+                        obj.deaths.push(e.Deaths);
+                        obj.recovered.push(e.Recovered);
+                        obj.dates.push(e.Date.slice(0, 10) + '\n'); //e.Date.slice(0, 10) + '\n'
+                        obj.name = e.Country;
+                        }
+                    );
+                    console.log(obj.dates);
+                    console.log(obj.name);
+                    setCountryData(obj);
                 });
         counter++;
     };
     useEffect(() => {
         if (counter == 0)
-            dataFetch();
+            dataFetch("argentina");
     }, []);
 
     //
@@ -62,165 +85,93 @@ function Content() {
     var activeGraphYAxis = [];
     var activeGraphLabel = [];
 
-    var objetoTest = {
-        cases:{
-            byDay:{
-                xAxis: ["7", "8", "9", "10", "11", "12", "13"],
-                yAxis: [1200, 1900, 3000, 5000, 2000, 3000],
-                label: "Positive Cases"
-            },
-            byMonth:{
-                xAxis: ["November, 20","December, 20","January, 21","February, 21","March, 21", "April, 21"],
-                yAxis: [1200, 1900, 3000, 5000, 2000, 3000],
-                label: "Positive Cases"
-            },
-            byRegion:{
-                xAxis: ["Region 1", "Region 2", "Region 3", "Region 4", "Region 5", "Region 6", ],
-                yAxis: [1200, 190, 300, 50, 2000, 30000],
-                label: "Positive Cases"
-            },
-        },
-        deaths:{
-            byDay:{
-                xAxis: ["7", "8", "9", "10", "11", "12", "13"],
-                yAxis: [120, 190, 300, 500, 200, 300, 330],
-                label: "# of Deaths"
-            },
-            byMonth:{
-                xAxis: ["November, 20","December, 20","January, 21","February, 21","March, 21", "April, 21"],
-                yAxis: [1200, 1900, 3000, 5000, 2000, 3000],
-                label: "# of Deaths"
-            },
-            byRegion:{
-                xAxis: ["Region 1", "Region 2", "Region 3", "Region 4", "Region 5", "Region 6", ],
-                yAxis: [1200, 190, 300, 50, 2000, 30000],
-                label: "# of Deaths"
-            },
-        },
-        recovered:{
-            byDay:{
-                xAxis: ["7", "8", "9", "10", "11", "12", "13"],
-                yAxis: [120, 190, 300, 500, 200, 300, 330],
-                label: "# of Recovered"
-            },
-            byMonth:{
-                xAxis: ["November, 20","December, 20","January, 21","February, 21","March, 21", "April, 21"],
-                yAxis: [1200, 1900, 3000, 5000, 2000, 3000],
-                label: "# of Recovered"
-            },
-            byRegion:{
-                xAxis: ["Region 1", "Region 2", "Region 3", "Region 4", "Region 5", "Region 6", ],
-                yAxis: [1200, 190, 300, 50, 2000, 30000],
-                label: "# of Recovered"
-            },
-        },
-        //we have to set up this to work with more than one dataset
-        active:{
-            byDay:{
-                xAxis: ["7", "8", "9", "10", "11", "12", "13"],
-                yAxis: [120, 190, 300, 500, 200, 300, 330],
-                label: "# of Active"
-            },
-            byMonth:{
-                xAxis: ["November, 20","December, 20","January, 21","February, 21","March, 21", "April, 21"],
-                yAxis: [1200, 1900, 3000, 5000, 2000, 3000],
-                label: "# of Active"
-            },
-            byRegion:{
-                xAxis: ["Region 1", "Region 2", "Region 3", "Region 4", "Region 5", "Region 6", ],
-                yAxis: [1200, 190, 300, 50, 2000, 30000],
-                label: "# of Active"
-            },
-        }
-    };
-
 
     if (casesGraphType === "casesByDay")
     {
         casesGraphKind = "line";
-        casesGraphXAxis = objetoTest.cases.byDay.xAxis;
-        casesGraphYAxis = objetoTest.cases.byDay.yAxis;
-        casesGraphLabel = objetoTest.cases.byDay.label;
+        casesGraphXAxis = countryData.dates;
+        casesGraphYAxis = countryData.confirmed;
+        casesGraphLabel = 'Confirmed Cases';
     }
     else if (casesGraphType === "casesByMonth")
     {
         casesGraphKind = "bar";
-        casesGraphXAxis = objetoTest.cases.byMonth.xAxis;
-        casesGraphYAxis = objetoTest.cases.byMonth.yAxis;
-        casesGraphLabel = objetoTest.cases.byMonth.label;
+        casesGraphXAxis = countryData.dates;
+        casesGraphYAxis = countryData.confirmed;
+        casesGraphLabel = 'Confirmed Cases';
     }
     else if (casesGraphType === "casesByRegion")
     {
         casesGraphKind = "pie";
-        casesGraphXAxis = objetoTest.cases.byRegion.xAxis;
-        casesGraphYAxis = objetoTest.cases.byRegion.yAxis;
-        casesGraphLabel = objetoTest.cases.byRegion.label;
+        casesGraphXAxis = countryData.dates;
+        casesGraphYAxis = countryData.confirmed;
+        casesGraphLabel = 'Confirmed Cases';
     }
     //
     if (deathsGraphType === "deathsByDay")
     {
         deathsGraphKind = "line";
-        deathsGraphXAxis = objetoTest.deaths.byDay.xAxis;
-        deathsGraphYAxis = objetoTest.deaths.byDay.yAxis;
-        deathsGraphLabel = objetoTest.deaths.byDay.label;
+        deathsGraphXAxis = countryData.dates;
+        deathsGraphYAxis = countryData.deaths;
+        deathsGraphLabel = "Number of Deaths";
     }
     else if (deathsGraphType === "deathsByMonth")
     {
         deathsGraphKind = "bar";
-        deathsGraphXAxis = objetoTest.deaths.byMonth.xAxis;
-        deathsGraphYAxis = objetoTest.deaths.byMonth.yAxis;
-        deathsGraphLabel = objetoTest.deaths.byMonth.label;
+        deathsGraphXAxis = countryData.dates;
+        deathsGraphYAxis = countryData.deaths;
+        deathsGraphLabel = "Number of Deaths";
     }
     else if (deathsGraphType === "deathsByRegion")
     {
         deathsGraphKind = "pie";
-        deathsGraphXAxis = objetoTest.deaths.byRegion.xAxis;
-        deathsGraphYAxis = objetoTest.deaths.byRegion.yAxis;
-        deathsGraphLabel = objetoTest.deaths.byRegion.label;
+        deathsGraphXAxis = countryData.dates;
+        deathsGraphYAxis = countryData.deaths;
+        deathsGraphLabel = "Number of Deaths";
     }
     //
     if (recoveredGraphType === "recoveredByDay")
     {
         recoveredGraphKind = "line";
-        recoveredGraphXAxis = objetoTest.recovered.byDay.xAxis;
-        recoveredGraphYAxis = objetoTest.recovered.byDay.yAxis;
-        recoveredGraphLabel = objetoTest.recovered.byDay.label;
+        recoveredGraphXAxis = countryData.dates;
+        recoveredGraphYAxis = countryData.recovered;
+        recoveredGraphLabel = "Recovered Cases";
     }
     else if (recoveredGraphType === "recoveredByMonth")
     {
         recoveredGraphKind = "bar";
-        recoveredGraphXAxis = objetoTest.recovered.byMonth.xAxis;
-        recoveredGraphYAxis = objetoTest.recovered.byMonth.yAxis;
-        recoveredGraphLabel = objetoTest.recovered.byMonth.label;
+        recoveredGraphXAxis = countryData.dates;
+        recoveredGraphYAxis = countryData.recovered;
+        recoveredGraphLabel = "Recovered Cases";
     }
     else if (recoveredGraphType === "recoveredByRegion")
     {
         recoveredGraphKind = "pie";
-        recoveredGraphXAxis = objetoTest.recovered.byRegion.xAxis;
-        recoveredGraphYAxis = objetoTest.recovered.byRegion.yAxis;
-        recoveredGraphLabel = objetoTest.recovered.byRegion.label;
+        recoveredGraphXAxis = countryData.dates;
+        recoveredGraphYAxis = countryData.recovered;
+        recoveredGraphLabel = "Recovered Cases";
     }
     //
     if (activeGraphType === "activeByDay")
     {
         activeGraphKind = "line";
-        activeGraphXAxis = objetoTest.active.byDay.xAxis;
-        activeGraphYAxis = objetoTest.active.byDay.yAxis;
-        activeGraphLabel = objetoTest.active.byDay.label;
+        activeGraphXAxis = countryData.dates;
+        activeGraphYAxis = countryData.active;
+        activeGraphLabel = "Active Cases";
     }
     else if (activeGraphType === "activeByMonth")
     {
         activeGraphKind = "bar";
-        activeGraphXAxis = objetoTest.active.byMonth.xAxis;
-        activeGraphYAxis = objetoTest.active.byMonth.yAxis;
-        activeGraphLabel = objetoTest.active.byMonth.label;
+        activeGraphXAxis = countryData.dates;
+        activeGraphYAxis = countryData.active;
+        activeGraphLabel = "Active Cases";
     }
     else if (activeGraphType === "activeByRegion")
     {
         activeGraphKind = "pie";
-        activeGraphXAxis = objetoTest.active.byRegion.xAxis;
-        activeGraphYAxis = objetoTest.active.byRegion.yAxis;
-        activeGraphLabel = objetoTest.active.byRegion.label;
+        activeGraphXAxis = countryData.dates;
+        activeGraphYAxis = countryData.active;
+        activeGraphLabel = "Active Cases";
     }
 
     //
@@ -278,10 +229,17 @@ function Content() {
         return colors;
     } 
 
-    return <div className="content">
+    if (!countryData) {
+        return <div>Waiting...</div>
+    }
+    else if (countryData)
+    {return <div className="content">
         <div className="selectDiv">
             <div className="dropDiv">
-                <select className= "tester dropButton customH2Dark" onChange={(e) => {setSelection(e.target.value);}}>
+                <select className= "tester dropButton customH2Dark" onChange={(e) => {
+                        console.log('e.target.value', e.target.value);
+                        dataFetch(e.target.value);
+                    }}>
                     <option value="argentina">Argentina</option>
                     <option value="bahamas">Bahamas</option>
                     <option value="cuba">Cuba</option>
@@ -349,6 +307,6 @@ function Content() {
                 <Graph graph={activeGraphKind} xAxis={activeGraphXAxis} yAxis={activeGraphYAxis} Label={activeGraphLabel} colors={activeGraphKind === "pie" ? pieColorAmount(activeLightColor, activeNormalColor, activeDarkColor, activeGraphYAxis) : lineAndBarColorAmount(activeNormalColor, activeGraphYAxis)} lineColor={activeLineColor}/>
             </div>
         </div>
-    </div>
+    </div>}
 }
 export default Content;
