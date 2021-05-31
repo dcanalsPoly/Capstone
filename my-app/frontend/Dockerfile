@@ -1,14 +1,11 @@
-FROM node:10-alpine as build-step
-
-RUN mkdir /app
+FROM node:latest
 
 WORKDIR /app
 
-COPY package-lock.json /app
-COPY package.json /app
+COPY package.json ./
 
 RUN npm install
 
-COPY . /app
+COPY . .
 
-RUN npm start
+CMD ["npm", "start"]
