@@ -24,7 +24,7 @@ function Footer () {
                          References
                     </span> 
                     <span className={"customH2 padding"}>
-                         We utilize APIs from the Health Department of Puerto Rico.
+                         We utilize the Postman Coronavirus COVID19 API.
                     </span>
                </div>
            
