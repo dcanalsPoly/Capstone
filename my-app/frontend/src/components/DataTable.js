@@ -1,5 +1,4 @@
 import './DataTable.css';
-import DataTable, { createTheme } from 'react-data-table-component';
 
 function DataTable (props) {
 

@@ -7,7 +7,6 @@
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.1",
     "axios": "^0.21.1",
-    "bootstrap": "^4.6.0",
     "chart.js": "^2.9.4",
     "firebase": "^8.2.9",
     "react": "^17.0.1",
