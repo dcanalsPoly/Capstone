@@ -8,43 +8,37 @@ function CountryDataTable () {
   fromDate.setDate(fromDate.getDate() - 1);
   
   var countries = ["portugal", "south-africa", "thailand", "uruguay", "argentina", "philippines", "bahamas", "jamaica", "taiwan", "greece", "cuba", "panama", "egypt", "norway", "dominican-republic", "guatemala", "south-korea", "venezuela", "israel"];
-    
-  // const dataFetch = async (country) => {
-    
-  //     await fetch('https://api.covid19api.com/live/country/' + country + '/status/confirmed?from='+ fromDate)
-  //         .then(response => response.json())
-  //         .then(data => 
-  //             {   
+  const [allData, setAllData] = useState(false);  
 
-  //                 const obj = {
-  //                     active: [],
-  //                     confirmed: [],
-  //                     deaths: [],
-  //                     recovered: [],
-  //                     dates: [],
-  //                     name: '',
-  //                 };
+
+  const dataFetch = async () => {
+    
+      await fetch('https://api.covid19api.com/summary')
+          .then(response => response.json())
+          .then(data => 
+              {   
+                  var count = 1;
+                  const countryArray = [
+                  ];
                 
-  //                 data.forEach(e => {
-  //                   obj.active.push(e.Active);
-  //                   obj.confirmed.push(e.Confirmed);
-  //                   obj.deaths.push(e.Deaths);
-  //                   obj.recovered.push(e.Recovered);
-  //                   obj.dates.push(e.Date.slice(0, 10) + '\n');
-  //                   obj.name = e.Country;
-  //                   }
-  //               );
-                      
-  //               console.log('ACTIVE', obj.active);
-  //               console.log('NAME', obj.name);
-  //             });
-  // };
+                  data.Countries.forEach(e => {
+                    countryArray.push({
+                      id: count,
+                      country: e.Country,
+                      confirmed: e.TotalConfirmed,
+                      deaths: e.TotalDeaths,
+                      recovered: e.TotalRecovered
+                    })
+                    count++;
+                  }
+                );
+                setAllData(countryArray);
+              });
+  };
 
-  // useEffect(() => {
-  //   countries.forEach(e => {
-  //       dataFetch(e);
-  //   });
-  // }, []);
+  useEffect(() => {
+      dataFetch();
+  }, []);
 
   const columns = [
     {
@@ -70,16 +64,16 @@ function CountryDataTable () {
       sortable: true,
       right: true,
     },
-    {
-      name: 'Active',
-      selector: 'active',
-      sortable: true,
-      right: true,
-    },
+    // {
+    //   name: 'Active',
+    //   selector: 'active',
+    //   sortable: true,
+    //   right: true,
+    // },
   ];
-  var data = [{ id: 1, country: '...', confirmed: 'knks', deaths: '10k', recovered: '20k', active: '3k'}, {id: 2, country: 'Brazil', confirmed: '3k', deaths: '10k', recovered: '20k', active: '3k'}];
+  // var data = [{ id: 1, country: '...', confirmed: 'knks', deaths: '10k', recovered: '20k', active: '3k'}, {id: 2, country: 'Brazil', confirmed: '3k', deaths: '10k', recovered: '20k', active: '3k'}];
   
   return <div className="table">
-    <DataTable title="Summary of Totals" columns={columns} data={data}/></div>
+    <DataTable title="Summary of Totals" columns={columns} data={allData}/></div>
 }
 export default CountryDataTable;
