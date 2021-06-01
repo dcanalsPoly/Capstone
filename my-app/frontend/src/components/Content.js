@@ -4,7 +4,7 @@ import ColorblindButton from './ColorblindButton';
 import GraphSelector from './GraphSelector';
 import GraphTab from './GraphTab';
 import React, { useState, useEffect } from 'react';
-import DataTable from './DataTable';
+import CountryDataTable from './CountryDataTable';
 //import axios from "axios";
 
 function Content(props) {
@@ -46,6 +46,7 @@ function Content(props) {
                         obj.name = e.Country;
                         }
                     );
+                    
                     console.log(obj.dates);
                     console.log(obj.name);
                     setCountryData(obj);
@@ -64,10 +65,10 @@ function Content(props) {
     //
     //Graph dropdown
     //
-    const [casesGraphType, setCasesGraphType] = useState("casesByDay");
-    const [deathsGraphType, setDeathsGraphType] = useState("deathsByDay");
-    const [recoveredGraphType, setRecoveredGraphType] = useState("recoveredByDay");
-    const [activeGraphType, setActiveGraphType] = useState("activeByDay");
+    const [casesGraphType, setCasesGraphType] = useState("casesLine");
+    const [deathsGraphType, setDeathsGraphType] = useState("deathsBar");
+    const [recoveredGraphType, setRecoveredGraphType] = useState("recoveredBar");
+    const [activeGraphType, setActiveGraphType] = useState("activeLine");
 
     var casesGraphKind;
     var casesGraphXAxis = [];
@@ -90,93 +91,69 @@ function Content(props) {
     var activeGraphLabel = [];
 
 
-    if (casesGraphType === "casesByDay")
+    if (casesGraphType === "casesLine")
     {
         casesGraphKind = "line";
         casesGraphXAxis = countryData.dates;
         casesGraphYAxis = countryData.confirmed;
         casesGraphLabel = 'Confirmed Cases';
     }
-    else if (casesGraphType === "casesByMonth")
+    else if (casesGraphType === "casesBar")
     {
         casesGraphKind = "bar";
         casesGraphXAxis = countryData.dates;
         casesGraphYAxis = countryData.confirmed;
         casesGraphLabel = 'Confirmed Cases';
     }
-    else if (casesGraphType === "casesByRegion")
-    {
-        casesGraphKind = "pie";
-        casesGraphXAxis = countryData.dates;
-        casesGraphYAxis = countryData.confirmed;
-        casesGraphLabel = 'Confirmed Cases';
-    }
+   
     //
-    if (deathsGraphType === "deathsByDay")
+    if (deathsGraphType === "deathsLine")
     {
         deathsGraphKind = "line";
         deathsGraphXAxis = countryData.dates;
         deathsGraphYAxis = countryData.deaths;
         deathsGraphLabel = "Number of Deaths";
     }
-    else if (deathsGraphType === "deathsByMonth")
+    else if (deathsGraphType === "deathsBar")
     {
         deathsGraphKind = "bar";
         deathsGraphXAxis = countryData.dates;
         deathsGraphYAxis = countryData.deaths;
         deathsGraphLabel = "Number of Deaths";
     }
-    else if (deathsGraphType === "deathsByRegion")
-    {
-        deathsGraphKind = "pie";
-        deathsGraphXAxis = countryData.dates;
-        deathsGraphYAxis = countryData.deaths;
-        deathsGraphLabel = "Number of Deaths";
-    }
+    
     //
-    if (recoveredGraphType === "recoveredByDay")
+    if (recoveredGraphType === "recoveredLine")
     {
         recoveredGraphKind = "line";
         recoveredGraphXAxis = countryData.dates;
         recoveredGraphYAxis = countryData.recovered;
         recoveredGraphLabel = "Recovered Cases";
     }
-    else if (recoveredGraphType === "recoveredByMonth")
+    else if (recoveredGraphType === "recoveredBar")
     {
         recoveredGraphKind = "bar";
         recoveredGraphXAxis = countryData.dates;
         recoveredGraphYAxis = countryData.recovered;
         recoveredGraphLabel = "Recovered Cases";
     }
-    else if (recoveredGraphType === "recoveredByRegion")
-    {
-        recoveredGraphKind = "pie";
-        recoveredGraphXAxis = countryData.dates;
-        recoveredGraphYAxis = countryData.recovered;
-        recoveredGraphLabel = "Recovered Cases";
-    }
+    
     //
-    if (activeGraphType === "activeByDay")
+    if (activeGraphType === "activeLine")
     {
         activeGraphKind = "line";
         activeGraphXAxis = countryData.dates;
         activeGraphYAxis = countryData.active;
         activeGraphLabel = "Active Cases";
     }
-    else if (activeGraphType === "activeByMonth")
+    else if (activeGraphType === "activeBar")
     {
         activeGraphKind = "bar";
         activeGraphXAxis = countryData.dates;
         activeGraphYAxis = countryData.active;
         activeGraphLabel = "Active Cases";
     }
-    else if (activeGraphType === "activeByRegion")
-    {
-        activeGraphKind = "pie";
-        activeGraphXAxis = countryData.dates;
-        activeGraphYAxis = countryData.active;
-        activeGraphLabel = "Active Cases";
-    }
+    
 
     //
     //Colorblind Variables
@@ -201,7 +178,7 @@ function Content(props) {
     const [activeDarkColor, setActiveDarkColor] = useState('#2d6187'); 
     const [activeLineColor, setActiveLineColor] = useState('#75daad');
 
-    function pieColorAmount (lightColor, normalColor, darkColor, graphYAxis) {
+    function barColorAmount (lightColor, normalColor, darkColor, graphYAxis) {
         var colors = [];
         var count = 0;
         for (var i = 0; i < graphYAxis.length; i++)
@@ -223,7 +200,7 @@ function Content(props) {
         return colors;
     }
 
-    function lineAndBarColorAmount (normalColor, graphYAxis) {
+    function lineColorAmount (normalColor, graphYAxis) {
         var colors = [];
         for (var i = 0; i < graphYAxis.length; i++)
         {
@@ -277,7 +254,7 @@ function Content(props) {
                         <GraphSelector tabType={"Cases"} graphType={casesGraphType} setGraphType={setCasesGraphType}/>
                         <ColorblindButton setLightColor={setCasesLightColor} setNormalColor={setCasesNormalColor} setDarkColor={setCasesDarkColor} setLineColor={setCasesLineColor}/>
                     </div>
-                    <Graph graph={casesGraphKind} xAxis={casesGraphXAxis} yAxis={casesGraphYAxis} Label={casesGraphLabel} colors={casesGraphKind === "pie" ? pieColorAmount(casesLightColor, casesNormalColor, casesDarkColor, casesGraphYAxis) : lineAndBarColorAmount(casesNormalColor, casesGraphYAxis)} lineColor={casesLineColor}/>
+                    <Graph graph={casesGraphKind} xAxis={casesGraphXAxis} yAxis={casesGraphYAxis} Label={casesGraphLabel} colors={casesGraphKind === "bar" ? barColorAmount(casesLightColor, casesNormalColor, casesDarkColor, casesGraphYAxis) : lineColorAmount(casesNormalColor, casesGraphYAxis)} lineColor={casesLineColor}/>
                 </div>
                 
                 {/*Deaths*/}
@@ -287,7 +264,7 @@ function Content(props) {
                         <GraphSelector tabType={"Deaths"} graphType={deathsGraphType} setGraphType={setDeathsGraphType}/>
                         <ColorblindButton setLightColor={setDeathsLightColor} setNormalColor={setDeathsNormalColor} setDarkColor={setDeathsDarkColor} setLineColor={setDeathsLineColor}/>
                     </div>
-                    <Graph graph={deathsGraphKind} xAxis={deathsGraphXAxis} yAxis={deathsGraphYAxis} Label={deathsGraphLabel} colors={deathsGraphKind === "pie" ? pieColorAmount(deathsLightColor, deathsNormalColor, deathsDarkColor, deathsGraphYAxis) : lineAndBarColorAmount(deathsNormalColor, deathsGraphYAxis)} lineColor={deathsLineColor}/>
+                    <Graph graph={deathsGraphKind} xAxis={deathsGraphXAxis} yAxis={deathsGraphYAxis} Label={deathsGraphLabel} colors={deathsGraphKind === "bar" ? barColorAmount(deathsLightColor, deathsNormalColor, deathsDarkColor, deathsGraphYAxis) : lineColorAmount(deathsNormalColor, deathsGraphYAxis)} lineColor={deathsLineColor}/>
                 </div>
             </div>
             
@@ -299,7 +276,7 @@ function Content(props) {
                     <GraphSelector tabType={"Recovered"} graphType={recoveredGraphType} setGraphType={setRecoveredGraphType}/>
                     <ColorblindButton setLightColor={setRecoveredLightColor} setNormalColor={setRecoveredNormalColor} setDarkColor={setRecoveredDarkColor} setLineColor={setRecoveredLineColor}/>
                 </div>
-                <Graph graph={recoveredGraphKind} xAxis={recoveredGraphXAxis} yAxis={recoveredGraphYAxis} Label={recoveredGraphLabel} colors={recoveredGraphKind === "pie" ? pieColorAmount(recoveredLightColor, recoveredNormalColor, recoveredDarkColor, recoveredGraphYAxis) : lineAndBarColorAmount(recoveredNormalColor, recoveredGraphYAxis)} lineColor={recoveredLineColor}/>
+                <Graph graph={recoveredGraphKind} xAxis={recoveredGraphXAxis} yAxis={recoveredGraphYAxis} Label={recoveredGraphLabel} colors={recoveredGraphKind === "bar" ? barColorAmount(recoveredLightColor, recoveredNormalColor, recoveredDarkColor, recoveredGraphYAxis) : lineColorAmount(recoveredNormalColor, recoveredGraphYAxis)} lineColor={recoveredLineColor}/>
             </div>
 
             {/*Active*/}
@@ -309,11 +286,11 @@ function Content(props) {
                     <GraphSelector tabType={"Active"} graphType={activeGraphType} setGraphType={setActiveGraphType}/>
                     <ColorblindButton setLightColor={setActiveLightColor} setNormalColor={setActiveNormalColor} setDarkColor={setActiveDarkColor} setLineColor={setActiveLineColor}/>
                 </div>
-                <Graph graph={activeGraphKind} xAxis={activeGraphXAxis} yAxis={activeGraphYAxis} Label={activeGraphLabel} colors={activeGraphKind === "pie" ? pieColorAmount(activeLightColor, activeNormalColor, activeDarkColor, activeGraphYAxis) : lineAndBarColorAmount(activeNormalColor, activeGraphYAxis)} lineColor={activeLineColor}/>
+                <Graph graph={activeGraphKind} xAxis={activeGraphXAxis} yAxis={activeGraphYAxis} Label={activeGraphLabel} colors={activeGraphKind === "bar" ? barColorAmount(activeLightColor, activeNormalColor, activeDarkColor, activeGraphYAxis) : lineColorAmount(activeNormalColor, activeGraphYAxis)} lineColor={activeLineColor}/>
             </div>
         </div>
         
-            {/* <DataTable/> */}
+            <CountryDataTable/>
         </div>
     }
 

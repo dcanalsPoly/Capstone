@@ -9,9 +9,9 @@ function GraphSelector (props) {
         return <div className="selectDiv">
             <div className="dropDiv">
                 <select className= "tester dropButton customH2Dark" onChange={(e) => {props.setGraphType(e.target.value);}}>
-                    <option value="casesByDay">Cases by Day</option>
-                    <option value="casesByMonth">Cases by Month</option>
-                    <option value="casesByRegion">Cases by Region</option>
+                    <option value="casesLine">Line Graph</option>
+                    <option value="casesBar">Bar Graph</option>
+        
                 </select>
             </div>
         </div>
@@ -21,9 +21,9 @@ function GraphSelector (props) {
         return <div className="selectDiv">
             <div className="dropDiv">
                 <select className= "tester dropButton customH2Dark" onChange={(e) => {props.setGraphType(e.target.value);}}>
-                    <option value="deathsByDay">Deaths by Day</option>
-                    <option value="deathsByMonth">Deaths by Month</option>
-                    <option value="deathsByRegion">Deaths by Region</option>
+                    <option value="deathsBar">Bar Graph</option>
+                    <option value="deathsLine">Line Graph</option>
+                    
                 </select>
             </div>
         </div>
@@ -33,9 +33,9 @@ function GraphSelector (props) {
         return <div className="selectDiv">
             <div className="dropDiv">
                 <select className= "tester dropButton customH2Dark" onChange={(e) => {props.setGraphType(e.target.value);}}>
-                    <option value="recoveredByDay">Recovered by Day</option>
-                    <option value="recoveredByMonth">Recovered by Month</option>
-                    <option value="recoveredByRegion">Recovered by Region</option>
+                    <option value="recoveredBar">Bar Graph</option>
+                    <option value="recoveredLine">Line Graph</option>
+                    
                 </select>
             </div>
         </div>
@@ -46,9 +46,9 @@ function GraphSelector (props) {
         return <div className="selectDiv">
             <div className="dropDiv">
                 <select className= "tester dropButton customH2Dark" onChange={(e) => {props.setGraphType(e.target.value);}}>
-                    <option value="activeByDay">Active by Day</option>
-                    <option value="activeByMonth">Active by Month</option>
-                    <option value="activeByRegion">Active by Region</option>
+                    <option value="activeLine">Line Graph</option>
+                    <option value="activeBar">Bar Graph</option>
+                    
                 </select>
             </div>
         </div>
