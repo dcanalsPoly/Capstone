@@ -64,16 +64,34 @@ function CountryDataTable () {
       sortable: true,
       right: true,
     },
-    // {
-    //   name: 'Active',
-    //   selector: 'active',
-    //   sortable: true,
-    //   right: true,
-    // },
   ];
-  // var data = [{ id: 1, country: '...', confirmed: 'knks', deaths: '10k', recovered: '20k', active: '3k'}, {id: 2, country: 'Brazil', confirmed: '3k', deaths: '10k', recovered: '20k', active: '3k'}];
+
+  var width = '350px';
+  const customStyles = {
+    rows: {
+      fontSize: '15px',
+      style: {
+        minHeight: '50px',
+      }
+    },
+    columns: {
+      style: {
+        width: width,
+      },
+    },
+    headCells: {
+      style: {
+        width: width,
+      },
+    },
+    cells: {
+      style: {
+        width: width,
+      },
+    },
+  };
   
   return <div className="table">
-    <DataTable title="Summary of Totals" columns={columns} data={allData}/></div>
+    <DataTable title="Summary of Totals" columns={columns} data={allData} customStyles={customStyles}/></div>
 }
 export default CountryDataTable;

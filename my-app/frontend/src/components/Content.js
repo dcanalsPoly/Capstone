@@ -5,24 +5,27 @@ import GraphSelector from './GraphSelector';
 import GraphTab from './GraphTab';
 import React, { useState, useEffect } from 'react';
 import CountryDataTable from './CountryDataTable';
-//import axios from "axios";
 
 function Content(props) {
     //
     //Country Selection
     //
-    var countries = ["portugal", "south-africa", "denmark", "thailand", "uruguay", "argentina", "philippines", "bahamas", "jamaica", "taiwan", "greece", "cuba", "panama", "egypt", "norway", "dominican-republic", "guatemala", "south-korea", "venezuela", "israel"];
+    
+    //var countries = ["portugal", "south-africa", "denmark", "thailand", "uruguay", "argentina", "philippines", "bahamas", "jamaica", "taiwan", "greece", "cuba", "panama", "egypt", "norway", "dominican-republic", "guatemala", "south-korea", "venezuela", "israel"];
+    
     //
     //Data Recollection
     //
     const [countryData, setCountryData] = useState(false);  
-    console.log('countryData: ', countryData);    
+    console.log('countryData: ', countryData);   
+     
     //Date definitions
     var toDate = new Date();
     toDate.setDate(toDate.getDate() - 1);
     var fromDate = new Date();
     fromDate.setDate(fromDate.getDate() - 8);
-
+    
+    //Data Fetching Function
     var counter = 0;
     const dataFetch = async (country) => {
         await fetch('https://api.covid19api.com/live/country/' + country + '/status/confirmed?from='+ fromDate +'&to='+ toDate + '')
@@ -225,7 +228,6 @@ function Content(props) {
                         <option value="argentina">Argentina</option>
                         <option value="bahamas">Bahamas</option>
                         <option value="cuba">Cuba</option>
-                        <option value="denmark">Denmark</option>
                         <option value="dominican-republic">Dominican Republic</option>
                         <option value="egypt">Egypt</option>
                         <option value="greece">Greece</option>
