@@ -19,7 +19,7 @@ function Menu() {
 
   return <div className="menuRow">
       <span  className={clickedGraphs} onClick={() => setClicked("Graphs")}>
-        <Link to="graphs" offset={-145} spy={true} smooth={true}>Graphs</Link>
+        <Link to="graphs" offset={-220} spy={true} smooth={true}>Graphs</Link>
       </span>
       <span className={clickedReport} onClick={() => setClicked("Report")}>
         <Link to="report" offset={-95} spy={true} smooth={true}>Report</Link>
