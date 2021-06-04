@@ -24,7 +24,7 @@ function Content(props) {
     toDate.setDate(toDate.getDate() - 1);
     var fromDate = new Date();
     fromDate.setDate(fromDate.getDate() - 8);
-    
+
     //Data Fetching Function
     var counter = 0;
     const dataFetch = async (country) => {
@@ -45,7 +45,7 @@ function Content(props) {
                         obj.confirmed.push(e.Confirmed);
                         obj.deaths.push(e.Deaths);
                         obj.recovered.push(e.Recovered);
-                        obj.dates.push(e.Date.slice(0, 10) + '\n'); //e.Date.slice(0, 10) + '\n'
+                        obj.dates.push(e.Date.slice(0, 10) + '\n');
                         obj.name = e.Country;
                         }
                     );
@@ -57,6 +57,9 @@ function Content(props) {
                     props.setCasesSummary(obj.active[6]);
                     props.setDeathsSummary(obj.deaths[6]);
                     props.setRecoveredSummary(obj.recovered[6]);
+                    props.setWeeklyCasesSummary(obj.active[0]);
+                    props.setWeeklyDeathsSummary(obj.deaths[0]);
+                    props.setWeeklyRecoveredSummary(obj.recovered[0]);
                 });
         counter++;
     };

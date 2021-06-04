@@ -4,13 +4,13 @@ import './styling/customLabel.css';
 
 function SummaryTable(props) {
     return <div className="summaryTable">
-        <span className="customH1">Total Monthly Summary</span>
+        <span className="customH1">Total Weekly Summary</span>
         <div className="summaryRow">
-          <SummaryTile type='Cases' number={props.casesSummary * 4} showIcon='false'/>
-          <SummaryTile type='Deaths' number={props.deathsSummary * 4} showIcon='false'/>
-          <SummaryTile type='Recovered' number={props.recoveredSummary * 4} showIcon='false'/>
+          <SummaryTile type='Cases' number={props.weeklyCasesSummary} showIcon='false'/>
+          <SummaryTile type='Deaths' number={props.weeklydeathsSummary} showIcon='false'/>
+          <SummaryTile type='Recovered' number={props.weeklyrecoveredSummary} showIcon='false'/>
         </div>
-        <span className="customH1">Daily Summary</span>
+        <span className="customH1">Total Daily Summary</span>
         <div className="summaryRow">
           <SummaryTile type='Cases' number={props.casesSummary} showIcon='false'/>
           <SummaryTile type='Deaths' number={props.deathsSummary} showIcon='false'/>

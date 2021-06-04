@@ -13,7 +13,7 @@ function Header(props) {
                 <span className="headerText">visualization</span>
                 <span className="headerText">& analysis</span>
             </div>
-            <SummaryTable casesSummary={props.casesSummary} deathsSummary={props.deathsSummary} recoveredSummary={props.recoveredSummary}/>
+            <SummaryTable casesSummary={props.casesSummary} deathsSummary={props.deathsSummary} recoveredSummary={props.recoveredSummary} weeklyCasesSummary={props.weeklyCasesSummary} weeklydeathsSummary={props.weeklydeathsSummary} weeklyrecoveredSummary={props.weeklyrecoveredSummary}/>
         </div>
         
     </div>
