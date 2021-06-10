@@ -45,24 +45,30 @@ function CountryDataTable () {
       name: 'Country',
       selector: 'country',
       sortable: true,
+      allowOverflow: false,
     },
     {
       name: 'Confirmed',
       selector: 'confirmed',
       sortable: true,
       right: true,
+      allowOverflow: false,
+
     },
     {
       name: 'Deaths',
       selector: 'deaths',
       sortable: true,
       right: true,
+      allowOverflow: false,
+
     },
     {
       name: 'Recovered',
       selector: 'recovered',
       sortable: true,
       right: true,
+      allowOverflow: false,
     },
   ];
 
