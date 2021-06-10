@@ -6,7 +6,7 @@
   background-color: white;
   align-content: center;
   align-items: center;
-  color: white;
+  color: black;
 }
 
 /* .App-header {
@@ -33,7 +33,7 @@
   font-size: 5mm;
   letter-spacing: 0.5mm;
   background-color: #71b38b;
-  color: white;
+  color: black;
   box-shadow: none;
   border: 0;
   cursor: pointer;

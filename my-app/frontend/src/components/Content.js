@@ -17,18 +17,33 @@ function Content(props) {
     //Data Recollection
     //
     const [countryData, setCountryData] = useState(false);  
+    const [country, setCountry] = useState("argentina");
+    const [fromDate, setFromDate] = useState(8);
+    const [counter, setCounter] = useState(0);
+
     console.log('countryData: ', countryData);   
      
     //Date definitions
     var toDate = new Date();
     toDate.setDate(toDate.getDate() - 1);
-    var fromDate = new Date();
-    fromDate.setDate(fromDate.getDate() - 8);
 
     //Data Fetching Function
-    var counter = 0;
-    const dataFetch = async (country) => {
-        await fetch('https://api.covid19api.com/live/country/' + country + '/status/confirmed?from='+ fromDate +'&to='+ toDate + '')
+    const dataFetch = async (value) => {
+
+        if (["8", "16", "31"].includes(value)) {
+            console.log("In If")
+            var x = new Date();
+            x.setDate(x.getDate() - value);
+            var y = country;
+        }
+
+        else if (typeof value == "string") {
+            var x = fromDate;
+            var y = value;
+        }
+
+
+        await fetch('https://api.covid19api.com/live/country/' + y + '/status/confirmed?from='+ x +'&to='+ toDate + '')
             .then(response => response.json())
             .then(data => 
                 {   
@@ -49,10 +64,6 @@ function Content(props) {
                         obj.name = e.Country;
                         }
                     );
-                    
-                    console.log(obj.dates);
-                    console.log(obj.name);
-                    setCountryData(obj);
                     //
                     props.setCasesSummary(obj.active[6]);
                     props.setDeathsSummary(obj.deaths[6]);
@@ -61,12 +72,16 @@ function Content(props) {
                     props.setWeeklyDeathsSummary(obj.deaths[0]);
                     props.setWeeklyRecoveredSummary(obj.recovered[0]);
                     props.setCountryTitleSummary(obj.name);
+
+                    setCountryData(obj);
+                    setCountry(y);
+                    setFromDate(x)
                 });
-        counter++;
     };
     useEffect(() => {
         if (counter == 0)
-            dataFetch("argentina");
+            dataFetch("8");
+            setCounter(1);
     }, []);
 
     //
@@ -250,6 +265,19 @@ function Content(props) {
                         <option value="thailand">Thailand</option>
                         <option value="uruguay">Uruguay</option>
                         <option value="venezuela">Venezuela</option>
+                    </select>
+                </div>
+                <div className="spacer"></div>
+                <div className="customH1Green">Date Range:</div>
+                <div className="spacer"></div>
+                <div className="dropDiv">
+                    <select className= "contentDropButton" onChange={(e) => {
+                            console.log('e.target.value', e.target.value, typeof(e.target.value));
+                            dataFetch(e.target.value);
+                        }}>
+                        <option value={8}>7 Days</option>
+                        <option value={16}>15 Days</option>
+                        <option value={31}>30 Days</option>
                     </select>
                 </div>
             </div>
