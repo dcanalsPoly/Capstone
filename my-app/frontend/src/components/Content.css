@@ -37,3 +37,30 @@
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
+.spacer {
+  width: 2%;
+}
+
+select.contentDropButton {
+  border: 1px solid white;
+  margin: 0%;
+  width: 100%;
+  letter-spacing: 0.3mm;
+  padding: 2px 0px 2px 10px;
+  height: fit-content;
+  width: fit-content;
+  color: #7eca9c;
+  font-size: 7mm;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contentRow {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  padding-bottom: 20px;
+}

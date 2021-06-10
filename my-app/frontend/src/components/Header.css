@@ -17,9 +17,10 @@
 
 .headerContainer {
   background-color: #71b38b;
-  padding: 70px 0px 70px 0px;
+  padding: 70px 40px 70px 40px;
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-flow: column nowrap;
   height: 150px;
   width: 30%;
@@ -30,7 +31,6 @@
   text-align: left;
   text-justify: auto;
   width: fit-content;
-  padding-left: 10%;
   font-size: 15mm;
   font-weight: 500;
   color: white;

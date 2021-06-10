@@ -6,7 +6,7 @@ function NavBar() {
   return <div className="navBar">
     <div className="column">
       <span className="customH1">Covid-19</span>
-      <span className="customH2">Visualization & Analysis</span>
+      <span className="customH2">Data Visualization & Analysis</span>
     </div>
     <Menu/>
   </div>

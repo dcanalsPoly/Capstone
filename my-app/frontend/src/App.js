@@ -13,11 +13,13 @@ function App() {
   const [weeklyCasesSummary, setWeeklyCasesSummary] = useState("false");
   const [weeklydeathsSummary, setWeeklyDeathsSummary] = useState("false");
   const [weeklyrecoveredSummary, setWeeklyRecoveredSummary] = useState("false");
+  //
+  const [countryTitleSummary, setCountryTitleSummary] = useState("false");
 
   return (
     <div className="App">
-      <Header casesSummary={casesSummary} deathsSummary={deathsSummary} recoveredSummary={recoveredSummary} weeklyCasesSummary={weeklyCasesSummary} weeklydeathsSummary={weeklydeathsSummary} weeklyrecoveredSummary={weeklyrecoveredSummary}/>
-      <Content setCasesSummary={setCasesSummary} setDeathsSummary={setDeathsSummary} setRecoveredSummary={setRecoveredSummary} setWeeklyCasesSummary={setWeeklyCasesSummary} setWeeklyDeathsSummary={setWeeklyDeathsSummary} setWeeklyRecoveredSummary={setWeeklyRecoveredSummary}/>
+      <Header countryTitleSummary={countryTitleSummary} casesSummary={casesSummary} deathsSummary={deathsSummary} recoveredSummary={recoveredSummary} weeklyCasesSummary={weeklyCasesSummary} weeklydeathsSummary={weeklydeathsSummary} weeklyrecoveredSummary={weeklyrecoveredSummary}/>
+      <Content setCountryTitleSummary={setCountryTitleSummary} setCasesSummary={setCasesSummary} setDeathsSummary={setDeathsSummary} setRecoveredSummary={setRecoveredSummary} setWeeklyCasesSummary={setWeeklyCasesSummary} setWeeklyDeathsSummary={setWeeklyDeathsSummary} setWeeklyRecoveredSummary={setWeeklyRecoveredSummary}/>
       <Footer/>
     </div>
   );

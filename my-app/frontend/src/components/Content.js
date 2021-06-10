@@ -60,6 +60,7 @@ function Content(props) {
                     props.setWeeklyCasesSummary(obj.active[0]);
                     props.setWeeklyDeathsSummary(obj.deaths[0]);
                     props.setWeeklyRecoveredSummary(obj.recovered[0]);
+                    props.setCountryTitleSummary(obj.name);
                 });
         counter++;
     };
@@ -222,9 +223,11 @@ function Content(props) {
     else if (countryData)
     {
         return <div className="content">
-            <div className="selectDiv">
+            <div className="contentRow">
+                <div className="customH1Green">Select Country:</div>
+                <div className="spacer"></div>
                 <div className="dropDiv">
-                    <select className= "tester dropButton customH2Dark" onChange={(e) => {
+                    <select className= "contentDropButton" onChange={(e) => {
                             console.log('e.target.value', e.target.value);
                             dataFetch(e.target.value);
                         }}>

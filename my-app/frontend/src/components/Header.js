@@ -9,9 +9,8 @@ function Header(props) {
         <NavBar/>
         <div className="headerRow">
             <div className="headerContainer">
-                <span className="headerText">simple data</span>
-                <span className="headerText">visualization</span>
-                <span className="headerText">& analysis</span>
+                <span className="headerText">Viewing Data For {props.countryTitleSummary}</span>
+                <span className="headerText"></span>
             </div>
             <SummaryTable casesSummary={props.casesSummary} deathsSummary={props.deathsSummary} recoveredSummary={props.recoveredSummary} weeklyCasesSummary={props.weeklyCasesSummary} weeklydeathsSummary={props.weeklydeathsSummary} weeklyrecoveredSummary={props.weeklyrecoveredSummary}/>
         </div>
